@@ -159,6 +159,52 @@ main {
   color: var(--color-text-secondary);
 }
 
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+}
+
+.footer-links svg {
+  flex-shrink: 0;
+}
+
+@media (min-width: 480px) {
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 /* ==========================================================================
    Responsive Breakpoints (T012)
    ========================================================================== */
@@ -438,6 +484,63 @@ main {
   touch-action: manipulation;
 }
 
+/* Network graph in explore page */
+.explore-graph {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  margin: 0;
+  min-height: 400px;
+}
+
+.explore-graph .graph-viewport {
+  height: 400px; /* Fixed height for explore layout */
+  background: var(--color-bg);
+}
+
+.explore-graph .graph-status {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border);
+}
+
+.explore-graph .graph-status .loading-message {
+  color: var(--color-accent);
+}
+
+/* Network graph light theme overrides for explore page */
+.explore-graph[data-theme="brand-dark"] {
+  background: var(--color-bg);
+}
+
+.explore-graph .graph-viewport svg {
+  background: var(--color-bg);
+}
+
+.explore-graph .graph-label {
+  fill: var(--color-text);
+}
+
+.explore-graph .graph-label.tag {
+  fill: var(--color-text);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.explore-graph .graph-label.post {
+  fill: var(--color-text);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.explore-graph .graph-edge {
+  stroke: var(--color-text-secondary);
+  stroke-opacity: 0.4;
+}
+
+.explore-graph .graph-edge.active {
+  stroke: var(--color-accent);
+  stroke-opacity: 0.8;
+}
+
 /* List view */
 .list-view {
   display: flex;
@@ -446,21 +549,51 @@ main {
 }
 
 .tag-filters {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.search-controls {
   display: flex;
-  flex-wrap: wrap;
   gap: var(--space-xs);
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.tag-search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tag-search-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(210, 105, 30, 0.2);
+}
+
+.tag-search-input::placeholder {
+  color: var(--color-text-secondary);
 }
 
 .tag-filter {
   background: var(--color-border);
   border: none;
-  padding: 0.3em 0.8em;
-  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   font-family: var(--font-family);
   font-size: 0.85rem;
+  color: var(--color-text);
   cursor: pointer;
-  text-transform: lowercase;
   transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
 }
 
 .tag-filter:hover {
@@ -471,6 +604,119 @@ main {
 .tag-filter.active {
   background: var(--color-accent);
   color: var(--color-bg);
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-result-tag {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  transition: background-color 0.2s;
+}
+
+.search-result-tag:hover {
+  background: var(--color-border);
+}
+
+.search-result-tag:focus {
+  outline: none;
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.search-no-results {
+  padding: 0.75rem;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Selected Tags Chips */
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-border);
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-family: var(--font-family);
+  max-width: 150px;
+}
+
+.tag-chip-remove {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+  margin: 0 0 0 0.25rem;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.tag-chip-remove:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tag-chip-remove:focus {
+  outline: 1px solid currentColor;
+  outline-offset: 1px;
+}
+
+/* Mobile responsiveness for search controls */
+@media (max-width: 480px) {
+  .search-controls {
+    flex-wrap: wrap;
+  }
+
+  .tag-search-input {
+    min-width: 150px;
+    flex: 1 1 auto;
+  }
+
+  .tag-filter {
+    flex-shrink: 0;
+  }
 }
 
 .post-list-compact {

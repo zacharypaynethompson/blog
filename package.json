@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy",
-    "serve": "npx @11ty/eleventy --serve --port=8080"
+    "serve": "npx @11ty/eleventy --serve --port=8080",
+    "test": "vitest",
+    "lint": "html-validate src/**/*.njk"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,8 @@
     "d3": "^7.9.0"
   },
   "devDependencies": {
-    "html-validate": "^10.11.1"
+    "html-validate": "^10.11.1",
+    "jsdom": "^28.1.0",
+    "vitest": "^4.1.0"
   }
 }
