@@ -1,0 +1,36 @@
+---
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+  filter:
+    - all
+    - posts
+    - tagList
+    - graphData
+permalink: /tags/{{ tag }}/
+layout: layouts/base.njk
+---
+
+<div class="tag-page">
+  <header class="tag-header">
+    <h1>posts tagged "{{ tag }}"</h1>
+    <p class="tag-count">{{ collections[tag].length }} post{% if collections[tag].length != 1 %}s{% endif %}</p>
+  </header>
+
+  <section class="post-list">
+    {% for post in collections[tag] | reverse %}
+    <article class="post-preview">
+      <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+      <div class="post-meta">
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      </div>
+      {% if post.data.description %}
+      <p class="post-description">{{ post.data.description }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+
+  <p class="back-link"><a href="/">← back to all posts</a></p>
+</div>

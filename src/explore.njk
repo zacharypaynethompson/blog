@@ -1,0 +1,61 @@
+---
+layout: layouts/base.njk
+title: explore
+permalink: /explore/
+---
+
+<div class="explore-page">
+  <header class="explore-header">
+    <h1>explore</h1>
+    <p>discover connections between posts through shared topics</p>
+  </header>
+
+  <div class="explore-container">
+    {# Network visualization #}
+    <div class="graph-container" id="graph">
+      <svg role="img" aria-labelledby="graph-title graph-desc">
+        <title id="graph-title">Post relationship network</title>
+        <desc id="graph-desc">An interactive network graph showing blog posts as nodes connected by shared tags. Click a node to read that post, hover to highlight related posts.</desc>
+      </svg>
+    </div>
+
+    {# List view with filters #}
+    <aside class="list-view">
+      <div class="tag-filters">
+        <button type="button" class="tag-filter active" data-tag="all">all</button>
+        {% for tag in collections.tagList %}
+        <button type="button" class="tag-filter" data-tag="{{ tag }}">{{ tag }}</button>
+        {% endfor %}
+      </div>
+
+      <ul class="post-list-compact" id="post-list">
+        {% for post in collections.posts %}
+        <li data-tags="{{ post.data.tags | join(',') }}" data-id="{{ post.fileSlug }}">
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+          <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+        </li>
+        {% endfor %}
+      </ul>
+    </aside>
+  </div>
+
+  {# Visually hidden accessible list alternative (T046) #}
+  <section class="visually-hidden" aria-labelledby="post-connections-heading">
+    <h2 id="post-connections-heading">Post connections</h2>
+    <ul>
+      {% for post in collections.posts %}
+      <li>
+        <strong>{{ post.data.title }}</strong>
+        {% if post.data.tags %}
+        (tags: {{ post.data.tags | reject("equalto", "posts") | join(", ") }})
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+
+{% block scripts %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/assets/js/explore.js"></script>
+{% endblock %}

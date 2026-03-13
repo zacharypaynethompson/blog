@@ -1,0 +1,508 @@
+/* ==========================================================================
+   CSS Custom Properties (T010)
+   ========================================================================== */
+
+:root {
+  /* Colors - Light Theme */
+  --color-bg: #FDFBF7;
+  --color-text: #2D2D2D;
+  --color-text-secondary: #5C5C5C;
+  --color-accent: #B7410E;
+  --color-accent-hover: #8A3009;
+  --color-border: #E8E4DF;
+
+  /* Typography */
+  --font-family: 'Bitter', Georgia, serif;
+  --font-size-base: 18px;
+  --line-height: 1.6;
+  --type-scale: 1.25;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+
+  /* Layout */
+  --max-width: 42rem;
+  --nav-height: 4rem;
+}
+
+/* ==========================================================================
+   Base Styles & Typography (T011)
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Headings - lowercase by default */
+h1, h2, h3, h4, h5, h6 {
+  margin: var(--space-lg) 0 var(--space-sm);
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: lowercase;
+}
+
+h1 { font-size: calc(1rem * var(--type-scale) * var(--type-scale) * var(--type-scale)); }
+h2 { font-size: calc(1rem * var(--type-scale) * var(--type-scale)); }
+h3 { font-size: calc(1rem * var(--type-scale)); }
+h4 { font-size: 1rem; }
+
+p {
+  margin: 0 0 var(--space-md);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-accent-hover);
+}
+
+/* ==========================================================================
+   Layout (T012 - Responsive)
+   ========================================================================== */
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+  min-height: calc(100vh - var(--nav-height) - 8rem);
+}
+
+/* Navigation */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--nav-height);
+}
+
+.nav-logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: lowercase;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-md);
+}
+
+.nav-links a {
+  color: var(--color-text);
+  text-transform: lowercase;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--color-accent);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (T012)
+   ========================================================================== */
+
+/* Mobile (default) */
+@media (max-width: 480px) {
+  :root {
+    --font-size-base: 16px;
+  }
+
+  .nav {
+    flex-direction: column;
+    height: auto;
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  :root {
+    --font-size-base: 17px;
+  }
+}
+
+/* Desktop (768px+) uses default values */
+
+/* ==========================================================================
+   Post Styles (T018)
+   ========================================================================== */
+
+.post-header {
+  margin-bottom: var(--space-xl);
+}
+
+.post-header h1 {
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+}
+
+.post-meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.post-tags {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: var(--color-border);
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  text-transform: lowercase;
+}
+
+.tag:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* Post Content */
+.post-content {
+  line-height: var(--line-height);
+}
+
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+  margin-top: var(--space-xl);
+}
+
+.post-content ul,
+.post-content ol {
+  margin: 0 0 var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+.post-content li {
+  margin-bottom: var(--space-xs);
+}
+
+.post-content blockquote {
+  margin: var(--space-md) 0;
+  padding: var(--space-sm) var(--space-md);
+  border-left: 3px solid var(--color-accent);
+  background-color: rgba(0, 0, 0, 0.02);
+  font-style: italic;
+}
+
+.post-content pre {
+  margin: var(--space-md) 0;
+  padding: var(--space-md);
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: 'SF Mono', Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.post-content code {
+  font-family: 'SF Mono', Monaco, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.post-content p code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: var(--space-md) 0;
+}
+
+.post-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-xl) 0;
+}
+
+/* ==========================================================================
+   Homepage Styles (T023)
+   ========================================================================== */
+
+.home .intro {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.post-list h2 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-sm);
+}
+
+.post-preview {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.post-preview:last-child {
+  border-bottom: none;
+}
+
+.post-preview h3 {
+  margin: 0 0 var(--space-xs);
+  font-size: calc(1rem * var(--type-scale));
+}
+
+.post-preview h3 a {
+  color: var(--color-text);
+}
+
+.post-preview h3 a:hover {
+  color: var(--color-accent);
+}
+
+.post-description {
+  margin: var(--space-sm) 0 0;
+  color: var(--color-text-secondary);
+}
+
+/* Error page */
+.error-page {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+.error-page h1 {
+  font-size: 4rem;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+/* ==========================================================================
+   Page Styles (T032)
+   ========================================================================== */
+
+.page-header h1 {
+  margin-top: 0;
+}
+
+.page-content {
+  line-height: var(--line-height);
+}
+
+.page-content p {
+  margin-bottom: var(--space-md);
+}
+
+/* ==========================================================================
+   Tag Page Styles (T035)
+   ========================================================================== */
+
+.tag-header {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-md);
+}
+
+.tag-header h1 {
+  margin-top: 0;
+  margin-bottom: var(--space-xs);
+}
+
+.tag-count {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.back-link {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
+   Explore Page Styles (T049)
+   ========================================================================== */
+
+.explore-header {
+  margin-bottom: var(--space-lg);
+}
+
+.explore-header h1 {
+  margin-top: 0;
+  margin-bottom: var(--space-xs);
+}
+
+.explore-header p {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.explore-container {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .explore-container {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Graph container */
+.graph-container {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.graph-container svg {
+  display: block;
+  width: 100%;
+  touch-action: manipulation;
+}
+
+/* List view */
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.tag-filter {
+  background: var(--color-border);
+  border: none;
+  padding: 0.3em 0.8em;
+  border-radius: 3px;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-transform: lowercase;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tag-filter:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.tag-filter.active {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.post-list-compact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list-compact li {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.2s;
+}
+
+.post-list-compact li:last-child {
+  border-bottom: none;
+}
+
+.post-list-compact li.highlighted {
+  background-color: rgba(183, 65, 14, 0.1);
+  margin: 0 calc(-1 * var(--space-sm));
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+}
+
+.post-list-compact a {
+  display: block;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.post-list-compact a:hover {
+  color: var(--color-accent);
+}
+
+.post-list-compact time {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* Visually hidden (accessibility) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
