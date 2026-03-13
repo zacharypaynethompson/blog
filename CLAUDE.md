@@ -3,6 +3,8 @@
 Auto-generated from all feature plans. Last updated: 2026-03-13
 
 ## Active Technologies
+- Node.js 18+ LTS (Eleventy static site generator) + Eleventy 2.x, CSS Custom Properties, Google Fonts (002-rustic-styling)
+- Static files (markdown posts, generated HTML/CSS/JS) (002-rustic-styling)
 
 - JavaScript (Node.js 18+ LTS) + Eleventy 2.x (static site generator), d3.js 7.x (visualization) (001-static-blog-site)
 
@@ -22,6 +24,7 @@ npm test && npm run lint
 JavaScript (Node.js 18+ LTS): Follow standard conventions
 
 ## Recent Changes
+- 002-rustic-styling: Added Node.js 18+ LTS (Eleventy static site generator) + Eleventy 2.x, CSS Custom Properties, Google Fonts
 
 - 001-static-blog-site: Added JavaScript (Node.js 18+ LTS) + Eleventy 2.x (static site generator), d3.js 7.x (visualization)
 

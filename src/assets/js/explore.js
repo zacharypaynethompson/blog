@@ -12,10 +12,10 @@
     linkDistance: 80,
     chargeStrength: -100,
     colors: {
-      node: '#B7410E',
-      nodeHover: '#8A3009',
+      node: '#D2691E',
+      nodeHover: '#A0520F',
       link: '#E8E4DF',
-      linkActive: '#B7410E',
+      linkActive: '#D2691E',
       text: '#2D2D2D'
     }
   };
