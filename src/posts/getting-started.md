@@ -8,7 +8,7 @@ description: Notes on building this site with Eleventy, a simple static site gen
 layout: layouts/post.njk
 ---
 
-This site is built with [Eleventy](https://www.11ty.dev/), a static site generator that prioritizes simplicity.
+This site is built with [Eleventy](https://www.11ty.dev/).
 
 ## why eleventy?
 
