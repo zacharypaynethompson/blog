@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ title }}",
+  "description": "{{ description }}",
+  "datePublished": "{{ date | isoDate }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ site.author.name }}"
+  },
+  "url": "{{ site.url }}{{ page.url }}"{% if tags %},
+  "keywords": "{{ tags | join(', ') }}"{% endif %}
+}
+</script>
+
+<article class="post">
+  <header class="post-header">
+    <h1>{{ title }}</h1>
+    {% include "partials/post-meta.njk" %}
+  </header>
+
+  <div class="post-content">
+    {{ content | safe }}
+  </div>
+</article>

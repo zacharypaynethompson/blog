@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+_site/
+
+# Eleventy cache
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
