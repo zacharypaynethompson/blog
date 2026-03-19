@@ -4,6 +4,10 @@ title: explore
 permalink: /explore/
 ---
 
+{% block head %}
+<link rel="stylesheet" href="/assets/css/network-graph.css">
+{% endblock %}
+
 <div class="explore-page">
   <header class="explore-header">
     <h1>explore</h1>
@@ -12,20 +16,47 @@ permalink: /explore/
 
   <div class="explore-container">
     {# Network visualization #}
-    <div class="graph-container" id="graph">
-      <svg role="img" aria-labelledby="graph-title graph-desc">
-        <title id="graph-title">Post relationship network</title>
-        <desc id="graph-desc">An interactive network graph showing blog posts as nodes connected by shared tags. Click a node to read that post, hover to highlight related posts.</desc>
-      </svg>
+    <div id="network-graph-container" class="network-graph explore-graph" data-theme="brand-dark" role="application" aria-labelledby="graph-title" aria-describedby="graph-desc">
+
+      <!-- Graph viewport -->
+      <div class="graph-viewport">
+        <svg id="network-graph-svg" role="img" aria-labelledby="graph-title graph-desc">
+          <title id="graph-title">Post relationship network</title>
+          <desc id="graph-desc">
+            Interactive visualization showing connections between blog posts and tags.
+            Posts appear as orange circles, tags as rounded rectangles.
+            Hover over nodes to see details and connections. Click posts to read them.
+          </desc>
+        </svg>
+      </div>
+
+      <!-- Loading and status -->
+      <div class="graph-status" aria-live="polite" aria-atomic="true">
+        <span class="loading-message">Loading network graph...</span>
+        <span class="error-message" style="display: none;">
+          Failed to load graph data
+        </span>
+      </div>
     </div>
 
-    {# List view with filters #}
+    {# List view with search controls at top #}
     <aside class="list-view">
-      <div class="tag-filters">
-        <button type="button" class="tag-filter active" data-tag="all">all</button>
-        {% for tag in collections.tagList %}
-        <button type="button" class="tag-filter" data-tag="{{ tag }}">{{ tag }}</button>
-        {% endfor %}
+      <div class="content-search">
+        <div class="search-controls">
+          <input
+            type="text"
+            id="content-search"
+            placeholder="Search posts..."
+            class="content-search-input"
+            autocomplete="off"
+            aria-label="Search post content"
+          >
+          <button type="button" class="clear-search-btn" id="clear-search-btn" style="display: none;">clear</button>
+        </div>
+
+        <div class="search-status" id="search-status" style="display: none;">
+          <!-- Search status will appear here -->
+        </div>
       </div>
 
       <ul class="post-list-compact" id="post-list">
@@ -57,5 +88,6 @@ permalink: /explore/
 
 {% block scripts %}
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="/assets/js/explore.js"></script>
+<script src="/assets/js/network-graph.js"></script>
+<script src="/assets/js/content-search.js"></script>
 {% endblock %}

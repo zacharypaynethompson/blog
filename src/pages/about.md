@@ -6,10 +6,6 @@ permalink: /about/
 
 I write about what interests me.
 
-On the professional side, that's **AI policy**, **data science**, and **analysis**. I'm fascinated by how data shapes decisions and how technology intersects with governance.
+This blog is a space for writing about the things that occupy my mind. On the professional side, that means Economics, public policy, data science, and analysis. On the personal side, possibly thoughts on food, drink, cooking, and music
 
-On the personal side, I write about **food**, **drink**, **cooking**, and **music**. These are the things that make life rich.
-
-This blog exists because writing helps me think. And thinking in public invites conversation.
-
-If you want to get in touch, you can find me on [GitHub](https://github.com/zacharypaynethompson).
+If you want to get in touch, you can find me on [Linkedin](https://www.linkedin.com/in/zac-payne-thompson/) or [GitHub](https://github.com/zacharypaynethompson).

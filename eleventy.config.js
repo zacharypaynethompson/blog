@@ -63,6 +63,87 @@ module.exports = function(eleventyConfig) {
     return { nodes, links };
   });
 
+  // Network Graph data for new network visualization
+  eleventyConfig.addCollection("networkGraphData", function(collectionApi) {
+    const posts = collectionApi.getFilteredByGlob("src/posts/*.md");
+
+    // Build post nodes
+    const postNodes = posts.map(post => ({
+      id: post.fileSlug,
+      type: 'post',
+      title: post.data.title,
+      url: post.url,
+      date: post.date.toISOString().split('T')[0],
+      tags: (post.data.tags || []).filter(t => t !== 'posts')
+    }));
+
+    // Collect all unique tags
+    const allTags = new Set();
+    posts.forEach(post => {
+      const tags = (post.data.tags || []).filter(t => t !== 'posts');
+      tags.forEach(tag => allTags.add(tag));
+    });
+
+    // Build tag nodes
+    const tagNodes = Array.from(allTags).map(tag => {
+      const connectedPosts = posts
+        .filter(post => (post.data.tags || []).includes(tag))
+        .map(post => post.fileSlug);
+
+      return {
+        id: tag,
+        type: 'tag',
+        name: tag,
+        count: connectedPosts.length,
+        connectedPosts: connectedPosts
+      };
+    });
+
+    // Build post-to-tag edges
+    const postTagEdges = [];
+    posts.forEach(post => {
+      const tags = (post.data.tags || []).filter(t => t !== 'posts');
+      tags.forEach(tag => {
+        postTagEdges.push({
+          source: post.fileSlug,
+          target: tag,
+          type: 'post-tag',
+          strength: 1.0
+        });
+      });
+    });
+
+    // Build post-to-post edges (from frontmatter references)
+    const postPostEdges = [];
+    posts.forEach(post => {
+      if (post.data.references && Array.isArray(post.data.references)) {
+        post.data.references.forEach(ref => {
+          postPostEdges.push({
+            source: post.fileSlug,
+            target: ref,
+            type: 'post-post',
+            strength: 1.5
+          });
+        });
+      }
+    });
+
+    const allNodes = [...postNodes, ...tagNodes];
+    const allLinks = [...postTagEdges, ...postPostEdges];
+
+    return {
+      nodes: allNodes,
+      links: allLinks,
+      metadata: {
+        generatedAt: new Date().toISOString(),
+        nodeCount: allNodes.length,
+        linkCount: allLinks.length,
+        postCount: postNodes.length,
+        tagCount: tagNodes.length
+      }
+    };
+  });
+
   // Date filter for templates
   eleventyConfig.addFilter("readableDate", (dateObj) => {
     return new Date(dateObj).toLocaleDateString("en-US", {

@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+title: Network Graph
+description: Explore blog posts and their connections through an interactive network visualization
+---
+
+{% block head %}
+<link rel="stylesheet" href="/assets/css/network-graph.css">
+{% endblock %}
+
+<!-- Skip links for accessibility (T054) -->
+<nav class="skip-links" aria-label="Skip navigation">
+  <a href="#network-graph-svg" class="skip-link">Skip to network graph</a>
+  <a href="#reset-graph" class="skip-link">Skip to graph controls</a>
+</nav>
+
+<!-- Enhanced description for screen readers (T052) -->
+<div id="graph-desc-detailed" class="visually-hidden">
+  This interactive network graph shows connections between blog posts and their tags.
+  Posts appear as orange circles and can be clicked to read the full article.
+  Tags appear as rounded rectangles and can be clicked to filter the graph.
+  Use arrow keys to navigate between nodes, Enter or Space to activate nodes.
+  Press Escape to reset any active filters and return to the full view.
+</div>
+
+<div id="network-graph-container" class="network-graph" data-theme="brand-dark" role="application" aria-labelledby="graph-title" aria-describedby="graph-desc graph-desc-detailed">
+
+  <!-- Graph controls -->
+  {% include "partials/graph-controls.njk" %}
+
+  <!-- Graph viewport -->
+  <div class="graph-viewport">
+    <svg id="network-graph-svg" role="img" aria-labelledby="graph-title graph-desc">
+      <title id="graph-title">Blog Post Network Graph</title>
+      <desc id="graph-desc">
+        Interactive visualization showing connections between blog posts and tags.
+        Posts appear as orange circles, tags as rounded rectangles.
+        Hover over nodes to see details and connections.
+      </desc>
+    </svg>
+  </div>
+
+  <!-- Loading and status -->
+  <div class="graph-status" aria-live="polite" aria-atomic="true">
+    <span class="loading-message">Loading network graph...</span>
+    <span class="error-message" style="display: none;">
+      Failed to load graph data
+    </span>
+  </div>
+</div>
+
+{% block scripts %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/assets/js/network-graph.js"></script>
+{% endblock %}
