@@ -356,6 +356,53 @@
     announceFilterState(`Showing ${connectedPostIds.size} posts for tag "${tagId}"`);
   }
 
+  // Filter graph by posts (for content search)
+  function filterByPosts(postIds) {
+    if (!postIds || postIds.length === 0) {
+      resetGraph();
+      return;
+    }
+
+    filteredTag = null; // Clear tag filter
+    const postIdSet = new Set(postIds);
+
+    // Find all tags connected to these posts
+    const connectedTags = new Set();
+    nodes.forEach(node => {
+      if (node.type === 'tag' && node.connectedPosts) {
+        const hasConnection = node.connectedPosts.some(postId => postIdSet.has(postId));
+        if (hasConnection) {
+          connectedTags.add(node.id);
+        }
+      }
+    });
+
+    // Show only the filtered posts and their connected tags
+    nodeElements
+      .style('opacity', d => {
+        if (d.type === 'post' && postIdSet.has(d.id)) return 1; // Matched posts
+        if (d.type === 'tag' && connectedTags.has(d.id)) return 0.8; // Connected tags
+        return 0.1; // Everything else
+      });
+
+    // Show only links involving the filtered posts
+    linkElements
+      .style('opacity', link => {
+        const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+        const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+
+        // Show connections to/from filtered posts
+        if (postIdSet.has(sourceId) || postIdSet.has(targetId)) return 0.6;
+        // Show connections between filtered posts
+        if (postIdSet.has(sourceId) && postIdSet.has(targetId)) return 0.8;
+        return 0.05;
+      });
+
+    // Update visual indicators
+    d3.select('#network-graph-container').classed('filtered', true);
+    announceFilterState(`Showing ${postIds.length} matching posts`);
+  }
+
   // Show filtered state visual indicators (T040)
   function showFilteredState(tagName, postCount) {
     // Add filtered class to container
@@ -596,6 +643,7 @@
   // Expose API for external access
   window.networkGraph = {
     filterByTag: filterByTag,
+    filterByPosts: filterByPosts,
     resetGraph: resetGraph,
     highlightNode: highlightNode
   };

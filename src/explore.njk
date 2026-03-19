@@ -41,25 +41,21 @@ permalink: /explore/
 
     {# List view with search controls at top #}
     <aside class="list-view">
-      <div class="tag-filters">
+      <div class="content-search">
         <div class="search-controls">
           <input
             type="text"
-            id="tag-search"
-            placeholder="Add tags... (Esc to clear all)"
-            class="tag-search-input"
+            id="content-search"
+            placeholder="Search posts..."
+            class="content-search-input"
             autocomplete="off"
-            aria-label="Search for tags to filter posts"
+            aria-label="Search post content"
           >
-          <button type="button" class="tag-filter active" data-tag="all" id="show-all-btn">show all</button>
+          <button type="button" class="clear-search-btn" id="clear-search-btn" style="display: none;">clear</button>
         </div>
 
-        <div class="selected-tags" id="selected-tags" style="display: none;">
-          <!-- Selected tag chips will appear here -->
-        </div>
-
-        <div class="search-results" id="search-results" style="display: none;">
-          <!-- Search results will be populated here -->
+        <div class="search-status" id="search-status" style="display: none;">
+          <!-- Search status will appear here -->
         </div>
       </div>
 
@@ -93,5 +89,5 @@ permalink: /explore/
 {% block scripts %}
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="/assets/js/network-graph.js"></script>
-<script src="/assets/js/explore-filters.js"></script>
+<script src="/assets/js/content-search.js"></script>
 {% endblock %}

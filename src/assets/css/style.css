@@ -466,6 +466,7 @@ main {
 @media (min-width: 768px) {
   .explore-container {
     grid-template-columns: 2fr 1fr;
+    align-items: start;
   }
 }
 
@@ -485,7 +486,7 @@ main {
 }
 
 /* Network graph in explore page */
-.explore-graph {
+.explore-graph.network-graph {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 4px;
@@ -548,9 +549,10 @@ main {
   gap: var(--space-md);
 }
 
-.tag-filters {
+.content-search {
   position: relative;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .search-controls {
@@ -558,9 +560,10 @@ main {
   gap: var(--space-xs);
   align-items: stretch;
   flex-wrap: nowrap;
+  margin-top: 0;
 }
 
-.tag-search-input {
+.content-search-input {
   flex: 1;
   min-width: 200px;
   padding: 0.5rem 0.75rem;
@@ -573,17 +576,17 @@ main {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.tag-search-input:focus {
+.content-search-input:focus {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 2px rgba(210, 105, 30, 0.2);
 }
 
-.tag-search-input::placeholder {
+.content-search-input::placeholder {
   color: var(--color-text-secondary);
 }
 
-.tag-filter {
+.clear-search-btn {
   background: var(--color-border);
   border: none;
   padding: 0.5rem 1rem;
@@ -596,14 +599,17 @@ main {
   white-space: nowrap;
 }
 
-.tag-filter:hover {
+.clear-search-btn:hover {
   background: var(--color-accent);
   color: var(--color-bg);
 }
 
-.tag-filter.active {
-  background: var(--color-accent);
-  color: var(--color-bg);
+.search-status {
+  margin-top: var(--space-xs);
+  padding: var(--space-xs);
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
 }
 
 .search-results {
@@ -709,12 +715,12 @@ main {
     flex-wrap: wrap;
   }
 
-  .tag-search-input {
+  .content-search-input {
     min-width: 150px;
     flex: 1 1 auto;
   }
 
-  .tag-filter {
+  .clear-search-btn {
     flex-shrink: 0;
   }
 }
@@ -740,6 +746,13 @@ main {
   margin: 0 calc(-1 * var(--space-sm));
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
+}
+
+.post-list-compact li.search-match mark {
+  background-color: rgba(210, 105, 30, 0.3);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
 }
 
 .post-list-compact a {
