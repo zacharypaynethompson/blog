@@ -84,22 +84,30 @@ Cut anything that exists only for rhetorical effect. Every sentence should do wo
 - Yes: "What I want to do here is figure out what my writing actually sounds like in a way I can hand to an LLM and say 'this is how I write'"
 
 ### 2. Precise over evocative
-Say what you mean rather than gesture at it.
+Say what you mean rather than gesture at it. Name the thing specifically rather than using vague nouns.
 
 - No: "It never quite lands the way I'd write it myself. There's always something off."
 - Yes: "It never quite sounds like I have written it myself."
+- No: "The business context, the tradeoffs, the things people care about."
+- Yes: "The information in business context, discussions of tradeoffs, and verbal articulation of the things people care about"
 
 ### 3. Structural thinker
-Respect logical scaffolding but keep surfaces clean.
+Respect logical scaffolding but keep surfaces clean. Combine short related sentences rather than leaving them fragmented.
 
 - No: "That's where the useful information lives — in the edits, in what I cut, what I keep, what I rephrase."
 - Yes: "The information in the edits, in what I cut, what I keep, what I rephrase, is where my writing style emerged."
+- No: "The knowledge base is a single repo. Obsidian Git syncs it automatically every few minutes."
+- Yes: "The knowledge base is a single repo and Obsidian Git syncs it automatically every few minutes."
 
 ### 4. Comfortable with tentativeness when genuine
-Don't assert false confidence. If something is exploratory, say so.
+Don't assert false confidence. If something is exploratory, say so. Use "probably", "I think", "my core thoughts" rather than definitive framing.
 
 - No: "The process works like this:"
 - Yes: "I think the process needs to work something like this:"
+- No: "it won't get captured"
+- Yes: "it probably won't get captured"
+- No: "The core bet here is that"
+- Yes: "My core thoughts here is that"
 
 ### 5. Allergic to being narrated
 Show the process, don't commentate on it. Never describe what the writing is doing as it does it.
@@ -118,6 +126,20 @@ Don't manufacture energy or dramatic buildup. Transitions should flow naturally.
 
 - No: "So let's work through it and find out." (preceded by a dramatic buildup and section break)
 - Yes: "Let's work through it and find out." (follows naturally from the previous paragraph)
+
+### 8. Flowing clauses over staccato fragments
+When listing related points, use comma-separated clauses or "e.g.," rather than punchy one-sentence-per-point fragments.
+
+- No: "User requirements surface. Edge cases get raised. Someone explains the business constraint."
+- Yes: "E.g., User requirements naturally surface, edge cases get raised, someone explains the business constraint."
+- No: "The basic idea is simple: dump everything into one place"
+- Yes: "The basic idea is you dump everything into one place"
+
+### 9. Generic over branded
+Use generic terms where a brand name isn't necessary.
+
+- No: "It lives in meetings, in Slack threads, in conversations"
+- Yes: "It lives in meetings, message threads and conversations"
 
 ## Formatting notes
 

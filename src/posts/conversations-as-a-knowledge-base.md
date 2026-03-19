@@ -9,13 +9,13 @@ description: Most of the context that matters for building software lives in con
 layout: layouts/post.njk
 ---
 
-A lot of the knowledge that matters when building software never makes it into the codebase. It lives in meetings, in Slack threads, in conversations where someone explains why we're doing it this way and not that way. The business context, the tradeoffs, the things people care about. That information shapes every decision, but it mostly evaporates.
+A lot of the knowledge that matters when building software never makes it into the codebase. It lives in meetings, message threads and conversations where someone explains why we're doing it this way and not that way. The information in business context, discussions of tradeoffs, and verbal articulation of the things people care about shape every decision, but it mostly evaporates.
 
 I've been thinking about what it would look like to actually capture it.
 
 ## the gap between talking and building
 
-When a team discusses a feature, the conversation contains a lot of useful signal. User requirements surface. Edge cases get raised. Someone explains the business constraint that rules out the obvious approach. All of that context is exactly what you'd want available when you sit down to write the code.
+When a team discusses a feature, the conversation contains a lot of useful signal. E.g., User requirements naturally surface, edge cases get raised, someone explains the business constraint that rules out the obvious approach. All of that context is exactly what you'd want available when you sit down to write the code.
 
 The problem has always been that turning conversations into structured documentation is tedious enough that it doesn't happen consistently. Meeting notes get taken sometimes, decisions get recorded occasionally, but there's no reliable pipeline from "we talked about it" to "the information is available where it's needed."
 
@@ -23,7 +23,7 @@ I think LLMs change this. They're good at reading messy, unstructured text and e
 
 ## a lightweight setup
 
-I've been experimenting with a workflow that I think makes this practical. The basic idea is simple: dump everything into one place, let an indexing layer make it searchable, and sync relevant context into project repos where agents can use it.
+I've been experimenting with a workflow that I think makes this practical. The basic idea is you dump everything into one place, let an indexing layer make it searchable, and sync relevant context into project repos where agents can use it.
 
 <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;margin:1.5rem auto;display:block;font-family:'Roboto Slab',Georgia,serif;">
   <defs>
@@ -61,9 +61,9 @@ I've been experimenting with a workflow that I think makes this practical. The b
 
 The components:
 
-**Obsidian daily notes** as the capture layer. One file per day, completely freeform. I paste meeting transcripts in, jot down ideas, drop notes from conversations. There's no structure to maintain, which is the point. If capturing something requires organising it first, it won't get captured.
+**Obsidian daily notes** as the capture layer. One file per day, completely freeform. I paste meeting transcripts in, jot down ideas, drop notes from conversations. There's no structure to maintain, which is the point. If capturing something requires organising it first, it probably won't get captured.
 
-**Git** as the source of truth. The knowledge base is a single repo. Obsidian Git syncs it automatically every few minutes.
+**Git** as the source of truth. The knowledge base is a single repo and Obsidian Git syncs it automatically every few minutes.
 
 **OpenViking** as the indexing layer. It sits on top of the repo and builds a semantic index, with tiered levels of detail. Agents can request a one-sentence summary of a chunk, or the core information, or the full original content, depending on how much context they need. This keeps token usage reasonable.
 
@@ -81,4 +81,4 @@ I think this is especially useful across multiple projects. Conversations about 
 
 I've been using a tool called SpecKit for structured specifications on this blog. It's a bit much for a blog, but for larger software with multiple stakeholders, having formal specs matters. I think the interesting thing is how a knowledge base like this feeds into that process. The conversations that inform specs don't need to be re-explained each time, because they're already captured and searchable. I'll probably write more about SpecKit once I've used it on something more substantial.
 
-The core bet here is that the bottleneck isn't capturing information, it's making capture easy enough that it actually happens. If all I need to do is paste a transcript or write a few sentences into today's note, and the indexing and retrieval happens automatically, then the knowledge base grows as a side effect of working normally.
+My core thoughts here is that the bottleneck isn't capturing information, it's making capture easy enough that it actually happens. If all I need to do is paste a transcript or write a few sentences into today's note, and the indexing and retrieval happens automatically, then the knowledge base grows as a side effect of working normally.
