@@ -61,11 +61,11 @@ I've been experimenting with a workflow that I think makes this practical. The b
 
 The components:
 
-**Obsidian daily notes** as the capture layer. One file per day, completely freeform. I paste meeting transcripts in, jot down ideas, drop notes from conversations. There's no structure to maintain, which is the point. If capturing something requires organising it first, it probably won't get captured.
+**[Obsidian](https://obsidian.md) daily notes** as the capture layer. One file per day, completely freeform. I paste meeting transcripts in, jot down ideas, drop notes from conversations. There's no structure to maintain, which is the point. If capturing something requires organising it first, it probably won't get captured.
 
 **Git** as the source of truth. The knowledge base is a single repo and Obsidian Git syncs it automatically every few minutes.
 
-**OpenViking** as the indexing layer. It sits on top of the repo and builds a semantic index, with tiered levels of detail. Agents can request a one-sentence summary of a chunk, or the core information, or the full original content, depending on how much context they need. This keeps token usage reasonable.
+**[OpenViking](https://github.com/volcengine/openviking)** as the indexing layer. It sits on top of the repo and builds a semantic index, with tiered levels of detail. Agents can request a one-sentence summary of a chunk, or the core information, or the full original content, depending on how much context they need. This keeps token usage reasonable.
 
 **A sync script** that pulls project docs (READMEs, design docs) into the knowledge base so everything is searchable in one place, and pushes relevant knowledge base content into project repos via `.ai/context/` directories where coding agents can read it.
 
@@ -79,6 +79,6 @@ I think this is especially useful across multiple projects. Conversations about 
 
 ## connecting to structured specs
 
-I've been using a tool called SpecKit for structured specifications on this blog. It's a bit much for a blog, but for larger software with multiple stakeholders, having formal specs matters. I think the interesting thing is how a knowledge base like this feeds into that process. The conversations that inform specs don't need to be re-explained each time, because they're already captured and searchable. I'll probably write more about SpecKit once I've used it on something more substantial.
+I've been using a tool called [SpecKit](https://github.com/github/spec-kit) for structured specifications on this blog. It's a bit much for a blog, but for larger software with multiple stakeholders, having formal specs matters. I think the interesting thing is how a knowledge base like this feeds into that process. The conversations that inform specs don't need to be re-explained each time, because they're already captured and searchable. I'll probably write more about SpecKit once I've used it on something more substantial.
 
 My core thoughts here is that the bottleneck isn't capturing information, it's making capture easy enough that it actually happens. If all I need to do is paste a transcript or write a few sentences into today's note, and the indexing and retrieval happens automatically, then the knowledge base grows as a side effect of working normally.
