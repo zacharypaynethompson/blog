@@ -18,15 +18,15 @@
   <meta name="twitter:title" content="{{ title or site.title }}">
   <meta name="twitter:description" content="{{ description or site.description }}">
 
-  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="icon" type="image/png" href="{{ '/assets/favicon.png' | url }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
   {% block head %}{% endblock %}
 </head>
-<body>
+<body data-path-prefix="{{ '/' | url }}">
   {% include "partials/nav.njk" %}
 
   <main>
@@ -35,7 +35,7 @@
 
   {% include "partials/footer.njk" %}
 
-  <script src="/assets/js/typewriter-logo.js"></script>
+  <script src="{{ '/assets/js/typewriter-logo.js' | url }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

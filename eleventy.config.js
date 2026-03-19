@@ -159,6 +159,7 @@ module.exports = function(eleventyConfig) {
   });
 
   return {
+    pathPrefix: "/blog/",
     dir: {
       input: "src",
       output: "_site",
