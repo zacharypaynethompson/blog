@@ -12,12 +12,6 @@ Hello,
 
 This blog is a space for writing about the things that occupy my mind. On the professional side, that means **Economics**, **public policy**, **data science**, and **analysis**. On the personal side, possibly thoughts on **food**, **drink**, **cooking**, and **music**.
 
-## why?
-
-Writing helps me think. And thinking in public invites conversation.
-
-## what to expect
-
 Posts will vary in length and formality. Some might be more polished and others rough sketches of ideas still forming.
 
 Thanks for reading.
