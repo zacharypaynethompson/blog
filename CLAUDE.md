@@ -14,7 +14,6 @@ Auto-generated from all feature plans. Last updated: 2026-03-13
 
 ```text
 src/
-tests/
 ```
 
 ## Commands
