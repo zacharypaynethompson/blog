@@ -10,14 +10,14 @@ title: home
     <h2>recent posts</h2>
     {% for post in collections.posts %}
     <article class="post-preview">
-      <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+      <h3><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
       <div class="post-meta">
         <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
         {% if post.data.tags %}
         <span class="post-tags">
           {% for tag in post.data.tags %}
             {% if tag != "posts" %}
-            <a href="/tags/{{ tag }}/" class="tag">{{ tag }}</a>
+            <a href="{{ '/tags/' | url }}{{ tag }}/" class="tag">{{ tag }}</a>
             {% endif %}
           {% endfor %}
         </span>

@@ -4,7 +4,7 @@
   <span class="post-tags">
     {% for tag in tags %}
       {% if tag != "posts" %}
-      <a href="/tags/{{ tag }}/" class="tag">{{ tag }}</a>
+      <a href="{{ '/tags/' | url }}{{ tag }}/" class="tag">{{ tag }}</a>
       {% endif %}
     {% endfor %}
   </span>

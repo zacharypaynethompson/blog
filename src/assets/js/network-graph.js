@@ -59,7 +59,8 @@
 
   // Load data from JSON endpoint
   async function loadGraphData() {
-    const response = await fetch('/data/network-graph.json');
+    const prefix = document.body.dataset.pathPrefix || '/';
+    const response = await fetch(prefix + 'data/network-graph.json');
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }

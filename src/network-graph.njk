@@ -5,7 +5,7 @@ description: Explore blog posts and their connections through an interactive net
 ---
 
 {% block head %}
-<link rel="stylesheet" href="/assets/css/network-graph.css">
+<link rel="stylesheet" href="{{ '/assets/css/network-graph.css' | url }}">
 {% endblock %}
 
 <!-- Skip links for accessibility (T054) -->
@@ -51,5 +51,5 @@ description: Explore blog posts and their connections through an interactive net
 
 {% block scripts %}
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="/assets/js/network-graph.js"></script>
+<script src="{{ '/assets/js/network-graph.js' | url }}"></script>
 {% endblock %}

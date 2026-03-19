@@ -32,7 +32,8 @@
   // Initialize the visualization
   async function init() {
     try {
-      const response = await fetch('/data/graph.json');
+      const prefix = document.body.dataset.pathPrefix || '/';
+      const response = await fetch(prefix + 'data/graph.json');
       const data = await response.json();
 
       nodes = data.nodes;
