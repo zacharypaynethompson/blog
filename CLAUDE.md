@@ -14,7 +14,6 @@ Auto-generated from all feature plans. Last updated: 2026-03-13
 
 ```text
 src/
-tests/
 ```
 
 ## Commands
@@ -27,9 +26,7 @@ JavaScript (Node.js 18+ LTS): Follow standard conventions
 
 ## Recent Changes
 - 003-obsidian-network-graph: Added JavaScript ES2020+ (browser), Node.js 18+ (Eleventy build process) + D3.js (force simulation, SVG rendering), Eleventy 2.x (existing static site generator)
+
 - 002-rustic-styling: Added Node.js 18+ LTS (Eleventy static site generator) + Eleventy 2.x, CSS Custom Properties, Google Fonts
 
 - 001-static-blog-site: Added JavaScript (Node.js 18+ LTS) + Eleventy 2.x (static site generator), d3.js 7.x (visualization)
-
-<!-- MANUAL ADDITIONS START -->
-<!-- MANUAL ADDITIONS END -->
