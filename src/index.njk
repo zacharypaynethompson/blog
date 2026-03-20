@@ -3,6 +3,10 @@ layout: layouts/base.njk
 title: home
 ---
 
+<div class="hero-physics" id="hero-physics">
+  <canvas></canvas>
+</div>
+
 <div class="home">
   <p class="intro">{{ site.description }}</p>
 
@@ -30,3 +34,7 @@ title: home
     {% endfor %}
   </section>
 </div>
+
+{% block scripts %}
+<script src="{{ '/assets/js/hero-physics.js' | url }}" defer></script>
+{% endblock %}

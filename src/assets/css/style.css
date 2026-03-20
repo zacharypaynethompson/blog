@@ -93,6 +93,38 @@ a:focus {
 }
 
 /* ==========================================================================
+   Hero Physics Banner
+   ========================================================================== */
+
+.hero-physics {
+  width: 100vw;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  margin-left: calc(-50vw + 50%);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-physics canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 480px) {
+  .hero-physics {
+    height: 100px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-physics canvas {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
    Layout (T012 - Responsive)
    ========================================================================== */
 
@@ -819,13 +851,10 @@ main {
   50% { opacity: 0; }
 }
 
-/* Optional: fade cursor out after typing completes */
+/* Hide cursor after typing completes */
 .typewriter-title .tw-cursor--done {
-  animation: tw-fade-out 1.5s 1.5s ease forwards, tw-blink 0.5s step-end infinite;
-}
-
-@keyframes tw-fade-out {
-  to { opacity: 0; }
+  animation: none;
+  display: none;
 }
 
 /* Character coloring for typewriter text */
