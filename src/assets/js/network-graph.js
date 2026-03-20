@@ -6,7 +6,6 @@
 (function() {
   'use strict';
 
-  // Configuration based on research findings
   const config = {
     forces: {
       link: { distance: 80, strength: 0.7 },
@@ -16,48 +15,42 @@
     },
     nodes: {
       post: { radius: 10, color: '#D2691E' },
-      tag: { radius: 8, color: '#E8943B', rx: 12, ry: 8 }
+      tag: { radius: 7, color: '#8b949e' }
     },
     animation: {
       velocityDecay: 0.4,
-      alphaMin: 0.001,
-      alphaTarget: 0.3
-    },
-    performance: { targetFPS: 30 }
+      alphaMin: 0.01
+    }
   };
 
   // State management
   let simulation;
-  let svg, container, width, height;
+  let svg, container, zoomBehavior, width, height;
   let nodes = [], links = [];
   let nodeElements, linkElements, labelElements;
   let hoveredNode = null;
+  let selectedNode = null;
   let filteredTag = null;
 
-  // Initialize the network graph
-  async function init() {
-    try {
-      showStatus('Loading network graph...');
+  // Pre-computed lookup structures
+  let nodeMap = new Map();
+  let adjacencyMap = new Map();
 
-      const data = await loadGraphData();
-
-      if (!data || !data.nodes || !data.links) {
-        throw new Error('Invalid data structure');
-      }
+  function init() {
+    loadGraphData().then(data => {
+      if (!data || !data.nodes || !data.links) return;
 
       setupSVG();
       processData(data);
       createVisualization();
       setupInteractions();
-
       showStatus('');
-    } catch (error) {
+    }).catch(error => {
       console.error('Failed to initialize network graph:', error);
       showError('Failed to load graph data');
-    }
+    });
   }
 
-  // Load data from JSON endpoint
   async function loadGraphData() {
     const prefix = document.body.dataset.pathPrefix || '/';
     const response = await fetch(prefix + 'data/network-graph.json');
@@ -67,30 +60,41 @@
     return response.json();
   }
 
-  // Setup SVG container and dimensions
   function setupSVG() {
     const svgElement = d3.select('#network-graph-svg');
-    const rect = svgElement.node().getBoundingClientRect();
+    const parentRect = svgElement.node().parentElement.getBoundingClientRect();
 
-    width = rect.width || 800;
-    height = rect.height || 500;
+    width = parentRect.width || 800;
+    height = parentRect.height || 500;
 
     svg = svgElement
       .attr('width', width)
       .attr('height', height)
       .attr('viewBox', `0 0 ${width} ${height}`);
 
-    // Create main group for zoom/pan
     svg.selectAll('*').remove();
     container = svg.append('g').attr('class', 'graph-container');
+
+    // Zoom and pan
+    zoomBehavior = d3.zoom()
+      .scaleExtent([0.3, 4])
+      .on('zoom', (event) => {
+        container.attr('transform', event.transform);
+        // If user manually zoomed (not programmatic), stop auto-fitting
+        if (event.sourceEvent) {
+          userHasZoomed = true;
+        }
+      });
+
+    svg.call(zoomBehavior);
+
   }
 
-  // Process and prepare data for D3.js
   function processData(data) {
     nodes = data.nodes.map(d => ({
       ...d,
-      degree: 0, // Will be calculated
-      x: width / 2 + (Math.random() - 0.5) * 100, // Initial position near center
+      degree: 0,
+      x: width / 2 + (Math.random() - 0.5) * 100,
       y: height / 2 + (Math.random() - 0.5) * 100
     }));
 
@@ -100,24 +104,30 @@
       target: d.target
     }));
 
-    // Calculate node degrees for layout optimization
+    // Build node lookup map
+    nodeMap.clear();
+    nodes.forEach(n => nodeMap.set(n.id, n));
+
+    // Calculate degrees and build adjacency map
+    adjacencyMap.clear();
+    nodes.forEach(n => adjacencyMap.set(n.id, new Set()));
+
     links.forEach(link => {
-      const sourceNode = nodes.find(n => n.id === link.source);
-      const targetNode = nodes.find(n => n.id === link.target);
+      const sourceNode = nodeMap.get(link.source);
+      const targetNode = nodeMap.get(link.target);
       if (sourceNode) sourceNode.degree++;
       if (targetNode) targetNode.degree++;
+      if (adjacencyMap.has(link.source)) adjacencyMap.get(link.source).add(link.target);
+      if (adjacencyMap.has(link.target)) adjacencyMap.get(link.target).add(link.source);
     });
   }
 
-  // Create the D3.js force simulation and visualization
   function createVisualization() {
-    // Create force simulation with optimized settings
     simulation = d3.forceSimulation(nodes)
       .force('link', d3.forceLink(links)
         .id(d => d.id)
         .distance(config.forces.link.distance)
         .strength(link => {
-          // Hub dampening for better layout
           const sourceDegree = link.source.degree || 1;
           const targetDegree = link.target.degree || 1;
           return config.forces.link.strength / Math.min(sourceDegree, targetDegree);
@@ -133,34 +143,32 @@
       .velocityDecay(config.animation.velocityDecay)
       .alphaMin(config.animation.alphaMin);
 
-    // Create links (must be added first for proper layering)
+    // Links first for proper layering
     linkElements = container
       .selectAll('.graph-edge')
       .data(links)
       .join('line')
       .attr('class', d => `graph-edge ${d.type}`)
-      .attr('stroke-width', d => d.type === 'post-post' ? 2 : 1.5);
+      .attr('stroke-width', d => d.type === 'post-post' ? 1.5 : 1);
 
-    // Create nodes (simplified - circles for both, different colors)
+    // Nodes
     nodeElements = container
       .selectAll('.graph-node')
       .data(nodes)
       .join('circle')
       .attr('class', d => `graph-node ${d.type}`)
       .attr('r', d => d.type === 'post' ? config.nodes.post.radius : config.nodes.tag.radius)
-      .attr('role', d => d.type === 'post' ? 'button' : null)
       .attr('aria-label', d =>
         d.type === 'post'
-          ? `Navigate to blog post: ${d.title}`
+          ? `Blog post: ${d.title}`
           : `Tag: ${d.name}, ${d.count} connected posts`
       )
-      .attr('tabindex', d => d.type === 'post' ? '0' : null)
       .call(d3.drag()
         .on('start', handleDragStart)
         .on('drag', handleDrag)
         .on('end', handleDragEnd));
 
-    // Create labels
+    // Labels
     labelElements = container
       .selectAll('.graph-label')
       .data(nodes)
@@ -170,19 +178,13 @@
       .text(d => d.type === 'tag' ? (d.name || d.id) : (d.title || d.id))
       .attr('dy', d => d.type === 'tag' ? 4 : 0);
 
-    // Setup animation loop with performance monitoring
-    let animationId;
-    simulation.on('tick', () => {
-      if (!animationId) {
-        animationId = requestAnimationFrame(() => {
-          updatePositions();
-          animationId = null;
-        });
-      }
-    });
+    // Direct tick updates - no rAF throttle for responsive dragging
+    simulation.on('tick', updatePositions);
   }
 
-  // Update element positions (optimized for performance)
+  // Auto-fit: track whether user has manually zoomed/selected
+  let userHasZoomed = false;
+
   function updatePositions() {
     linkElements
       .attr('x1', d => d.source.x)
@@ -196,294 +198,329 @@
 
     labelElements
       .attr('x', d => d.x)
-      .attr('y', d => d.y + (d.type === 'post' ? -15 : 20)); // Posts above, tags below
+      .attr('y', d => d.y + (d.type === 'post' ? -15 : 20));
+
+    // Auto-fit viewport to contain all nodes (only while simulation is settling, not during user interaction)
+    if (!userHasZoomed && !selectedNode && simulation && simulation.alpha() > config.animation.alphaMin) {
+      fitToNodes();
+    }
   }
 
-  // Setup hover and interaction handlers
+  function fitToNodes() {
+    if (nodes.length === 0) return;
+
+    const padding = 40;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+    nodes.forEach(n => {
+      if (n.x < minX) minX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.x > maxX) maxX = n.x;
+      if (n.y > maxY) maxY = n.y;
+    });
+
+    const graphWidth = maxX - minX + padding * 2;
+    const graphHeight = maxY - minY + padding * 2;
+
+    if (graphWidth <= 0 || graphHeight <= 0) return;
+
+    const scale = Math.min(
+      width / graphWidth,
+      height / graphHeight,
+      1.5 // Don't zoom in too much
+    );
+
+    // Only adjust if nodes are actually outside the viewport
+    if (scale >= 1) return;
+
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+
+    const transform = d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(scale)
+      .translate(-centerX, -centerY);
+
+    // Apply directly (no transition during simulation to avoid fighting)
+    svg.call(zoomBehavior.transform, transform);
+  }
+
   function setupInteractions() {
     nodeElements
       .on('mouseenter', handleNodeHover)
       .on('mouseleave', handleNodeUnhover)
       .on('click', handleNodeClick);
 
-    // Reset button
-    d3.select('#reset-graph')
-      .on('click', resetGraph);
+    d3.select('#reset-graph').on('click', resetGraph);
 
-    // Background click to clear selections
+    // Background click to deselect
     svg.on('click', (event) => {
       if (event.target === svg.node()) {
         resetGraph();
       }
     });
 
-    // Escape key to reset filtering (T039)
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && filteredTag) {
+      if (event.key === 'Escape') {
         resetGraph();
       }
     });
 
-    // Keyboard navigation with roving tabindex (T051)
     setupKeyboardNavigation();
   }
 
-  // Handle node hover effects
   function handleNodeHover(event, d) {
     hoveredNode = d;
 
-    // Highlight the node
-    d3.select(event.currentTarget)
-      .classed('brand-node-glow', true);
+    d3.select(event.currentTarget).classed('brand-node-glow', true);
 
-    // Show post title labels on hover
+    // Show label on hover for posts
     if (d.type === 'post') {
       labelElements
         .filter(node => node.id === d.id && node.type === 'post')
         .classed('visible', true);
     }
 
-    // Highlight connected edges
-    linkElements
-      .classed('active', link => {
-        const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
-        const targetId = typeof link.target === 'object' ? link.target.id : link.target;
-        return (sourceId === d.id || targetId === d.id);
-      });
+    const neighbors = adjacencyMap.get(d.id) || new Set();
 
-    // Dim non-connected elements
-    nodeElements
-      .style('opacity', node => {
-        if (node.id === d.id) return 1;
-        const isConnected = links.some(link => {
-          const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
-          const targetId = typeof link.target === 'object' ? link.target.id : link.target;
-          return (sourceId === d.id && targetId === node.id) ||
-                 (targetId === d.id && sourceId === node.id);
-        });
-        return isConnected ? 1 : 0.3;
-      });
+    // Highlight connected edges
+    linkElements.classed('active', link => {
+      const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+      const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+      return (sourceId === d.id || targetId === d.id);
+    });
+
+    // Dim non-connected nodes
+    nodeElements.style('opacity', node => {
+      if (node.id === d.id) return 1;
+      return neighbors.has(node.id) ? 1 : 0.3;
+    });
   }
 
-  // Handle node unhover
   function handleNodeUnhover(event, d) {
     hoveredNode = null;
 
-    // Remove hover effects
-    d3.select(event.currentTarget)
-      .classed('brand-node-glow', false);
+    d3.select(event.currentTarget).classed('brand-node-glow', false);
 
-    // Hide post title labels
     if (d.type === 'post') {
       labelElements
         .filter(node => node.id === d.id && node.type === 'post')
         .classed('visible', false);
     }
 
-    // Reset all elements
     linkElements.classed('active', false);
-    nodeElements.style('opacity', 1);
+
+    // Restore opacity (respect filter state)
+    if (filteredTag) {
+      applyFilterOpacity();
+    } else {
+      nodeElements.style('opacity', 1);
+    }
   }
 
-  // Handle node click for navigation and filtering (T029, T030, T032, T033, T034)
   function handleNodeClick(event, d) {
-    // Prevent event bubbling to background
     event.stopPropagation();
 
     if (d.type === 'post') {
-      // Navigate to post URL
-      if (d.url) {
-        window.location.href = d.url;
-      }
+      selectPost(d);
     } else if (d.type === 'tag') {
-      // Filter graph by tag
       filterByTag(d.id);
-
-      // Also update sidebar filters (for explore page integration)
       updateSidebarFilter(d.id);
     }
   }
 
-  // Filter graph by tag (T034, T035, T042)
+  // Select a post node: highlight, zoom, notify sidebar
+  function selectPost(d) {
+    if (selectedNode && selectedNode.id === d.id) {
+      deselectPost();
+      return;
+    }
+
+    selectedNode = d;
+
+    // Highlight selected node
+    nodeElements.classed('selected', node => node.id === d.id);
+
+    // Show label
+    labelElements
+      .filter(node => node.id === d.id && node.type === 'post')
+      .classed('visible', true);
+
+    // Smooth zoom to center on the selected node
+    const scale = 1.5;
+    const transform = d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(scale)
+      .translate(-d.x, -d.y);
+
+    svg.transition()
+      .duration(500)
+      .call(zoomBehavior.transform, transform);
+
+    // Highlight connected nodes
+    const neighbors = adjacencyMap.get(d.id) || new Set();
+    nodeElements.style('opacity', node => {
+      if (node.id === d.id) return 1;
+      return neighbors.has(node.id) ? 0.8 : 0.2;
+    });
+
+    linkElements.style('opacity', link => {
+      const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+      const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+      return (sourceId === d.id || targetId === d.id) ? 0.6 : 0.05;
+    });
+
+    // Notify sidebar to highlight and scroll to this post
+    notifySidebar(d.id);
+  }
+
+  function deselectPost() {
+    const hadSelection = selectedNode !== null;
+    selectedNode = null;
+    nodeElements.classed('selected', false);
+    labelElements.filter('.post').classed('visible', false);
+    nodeElements.style('opacity', 1);
+    linkElements.style('opacity', d => d.type === 'post-post' ? 0.3 : 0.15);
+
+    if (hadSelection) {
+      svg.transition()
+        .duration(400)
+        .call(zoomBehavior.transform, d3.zoomIdentity);
+      notifySidebar(null);
+    }
+  }
+
+  function notifySidebar(postId) {
+    const event = new CustomEvent('graph:postSelected', { detail: { postId } });
+    document.dispatchEvent(event);
+  }
+
   function filterByTag(tagId) {
     if (filteredTag === tagId) {
-      // If clicking the same tag, reset instead
       resetGraph();
       return;
     }
 
+    deselectPost();
     filteredTag = tagId;
 
-    // Find the tag node to get connected posts
     const tagNode = nodes.find(n => n.id === tagId && n.type === 'tag');
     if (!tagNode) return;
 
-    // Handle empty state
     if (!tagNode.connectedPosts || tagNode.connectedPosts.length === 0) {
-      showFilteredState(tagId, 0);
-      // Hide all nodes and links
       nodeElements.style('opacity', 0.1);
-      linkElements.style('opacity', 0.1);
-      // Keep the clicked tag visible
+      linkElements.style('opacity', 0.05);
       nodeElements.filter(n => n.id === tagId).style('opacity', 1);
-      announceFilterState(`Tag "${tagId}" has no connected posts`);
+      showFilteredState(tagId, 0);
       return;
     }
 
     const connectedPostIds = new Set(tagNode.connectedPosts);
+    applyFilterOpacity();
 
-    // Show only the filtered tag, connected posts, and their connections
-    nodeElements
-      .style('opacity', d => {
-        if (d.id === tagId) return 1; // The filtered tag
-        if (d.type === 'post' && connectedPostIds.has(d.id)) return 1; // Connected posts
-        return 0.1; // Everything else
-      });
-
-    // Show only links involving the filtered tag or connected posts
-    linkElements
-      .style('opacity', link => {
-        const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
-        const targetId = typeof link.target === 'object' ? link.target.id : link.target;
-
-        // Show tag-post connections and post-post connections within filtered set
-        if (sourceId === tagId || targetId === tagId) return 0.6;
-        if (connectedPostIds.has(sourceId) && connectedPostIds.has(targetId)) return 0.4;
-        return 0.05;
-      });
-
-    // Update visual indicators and announce state
     showFilteredState(tagId, connectedPostIds.size);
-    announceFilterState(`Showing ${connectedPostIds.size} posts for tag "${tagId}"`);
   }
 
-  // Filter graph by posts (for content search)
+  function applyFilterOpacity() {
+    if (!filteredTag) return;
+
+    const tagNode = nodes.find(n => n.id === filteredTag && n.type === 'tag');
+    if (!tagNode) return;
+    const connectedPostIds = new Set(tagNode.connectedPosts || []);
+
+    nodeElements.style('opacity', d => {
+      if (d.id === filteredTag) return 1;
+      if (d.type === 'post' && connectedPostIds.has(d.id)) return 1;
+      return 0.1;
+    });
+
+    linkElements.style('opacity', link => {
+      const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+      const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+      if (sourceId === filteredTag || targetId === filteredTag) return 0.4;
+      if (connectedPostIds.has(sourceId) && connectedPostIds.has(targetId)) return 0.3;
+      return 0.05;
+    });
+  }
+
   function filterByPosts(postIds) {
     if (!postIds || postIds.length === 0) {
       resetGraph();
       return;
     }
 
-    filteredTag = null; // Clear tag filter
+    deselectPost();
+    filteredTag = null;
     const postIdSet = new Set(postIds);
 
-    // Find all tags connected to these posts
     const connectedTags = new Set();
     nodes.forEach(node => {
       if (node.type === 'tag' && node.connectedPosts) {
-        const hasConnection = node.connectedPosts.some(postId => postIdSet.has(postId));
-        if (hasConnection) {
+        if (node.connectedPosts.some(postId => postIdSet.has(postId))) {
           connectedTags.add(node.id);
         }
       }
     });
 
-    // Show only the filtered posts and their connected tags
-    nodeElements
-      .style('opacity', d => {
-        if (d.type === 'post' && postIdSet.has(d.id)) return 1; // Matched posts
-        if (d.type === 'tag' && connectedTags.has(d.id)) return 0.8; // Connected tags
-        return 0.1; // Everything else
-      });
+    nodeElements.style('opacity', d => {
+      if (d.type === 'post' && postIdSet.has(d.id)) return 1;
+      if (d.type === 'tag' && connectedTags.has(d.id)) return 0.8;
+      return 0.1;
+    });
 
-    // Show only links involving the filtered posts
-    linkElements
-      .style('opacity', link => {
-        const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
-        const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+    linkElements.style('opacity', link => {
+      const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+      const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+      if (postIdSet.has(sourceId) && postIdSet.has(targetId)) return 0.6;
+      if (postIdSet.has(sourceId) || postIdSet.has(targetId)) return 0.4;
+      return 0.05;
+    });
 
-        // Show connections to/from filtered posts
-        if (postIdSet.has(sourceId) || postIdSet.has(targetId)) return 0.6;
-        // Show connections between filtered posts
-        if (postIdSet.has(sourceId) && postIdSet.has(targetId)) return 0.8;
-        return 0.05;
-      });
-
-    // Update visual indicators
     d3.select('#network-graph-container').classed('filtered', true);
-    announceFilterState(`Showing ${postIds.length} matching posts`);
   }
 
-  // Show filtered state visual indicators (T040)
   function showFilteredState(tagName, postCount) {
-    // Add filtered class to container
     d3.select('#network-graph-container').classed('filtered', true);
-
-    // Update reset button to show it's needed
     d3.select('#reset-graph')
       .classed('active', true)
-      .text(`Reset (showing ${postCount} posts for "${tagName}")`);
+      .text(`Reset (${postCount} posts for "${tagName}")`);
   }
 
-  // Announce filter state changes for screen readers (T041)
-  function announceFilterState(message) {
-    const liveRegion = document.querySelector('[aria-live="polite"]');
-    if (liveRegion) {
-      // Clear and set new message for reliable announcement
-      liveRegion.textContent = '';
-      setTimeout(() => {
-        liveRegion.textContent = message;
-      }, 100);
-    }
-  }
-
-  // Drag interaction handlers (T043, T044, T045, T046, T048, T049)
   function handleDragStart(event, d) {
-    // Prevent click event from firing when dragging
     event.sourceEvent.stopPropagation();
-
-    // Add visual feedback for dragging
-    d3.select(event.sourceEvent.target)
-      .classed('dragging', true);
-
-    // Restart simulation with higher alpha for responsive physics
     if (simulation) {
       simulation.alphaTarget(0.3).restart();
     }
-
-    // Fix the dragged node position
     d.fx = d.x;
     d.fy = d.y;
   }
 
   function handleDrag(event, d) {
-    // Update fixed position to follow mouse/touch
     d.fx = event.x;
     d.fy = event.y;
   }
 
   function handleDragEnd(event, d) {
-    // Remove visual feedback
-    d3.select(event.sourceEvent.target)
-      .classed('dragging', false);
-
-    // Let simulation settle back to normal
     if (simulation) {
       simulation.alphaTarget(0);
     }
-
-    // Release fixed position to allow natural physics
     d.fx = null;
     d.fy = null;
   }
 
-  // Keyboard navigation with roving tabindex (T051)
   function setupKeyboardNavigation() {
     let currentFocusIndex = 0;
     const focusableNodes = nodes.filter(n => n.type === 'post' || n.type === 'tag');
 
-    // Update tabindex for all nodes
     function updateTabindex() {
-      nodeElements.attr('tabindex', (d, i) => {
+      nodeElements.attr('tabindex', (d) => {
         const nodeIndex = focusableNodes.findIndex(n => n.id === d.id);
         return nodeIndex === currentFocusIndex ? '0' : '-1';
       });
     }
 
-    // Initial setup
     updateTabindex();
 
-    // Handle keyboard navigation
     document.addEventListener('keydown', (event) => {
       if (!event.target.classList.contains('graph-node')) return;
 
@@ -512,7 +549,6 @@
       if (moved) {
         event.preventDefault();
         updateTabindex();
-        // Focus the new current node
         const targetNode = focusableNodes[currentFocusIndex];
         const nodeElement = nodeElements.filter(d => d.id === targetNode.id);
         nodeElement.node()?.focus();
@@ -520,41 +556,38 @@
     });
   }
 
-  // Reset graph to default state
   function resetGraph() {
     hoveredNode = null;
     filteredTag = null;
+    userHasZoomed = false;
+    deselectPost();
 
-    // Reset node positions and clear drag state (T050)
     nodes.forEach(node => {
       node.fx = null;
       node.fy = null;
     });
 
-    // Clear all hover and drag effects
     nodeElements
       .classed('brand-node-glow', false)
-      .classed('dragging', false)
+      .classed('selected', false)
       .style('opacity', 1);
 
     linkElements
       .classed('active', false)
-      .style('opacity', d => d.type === 'post-post' ? 0.4 : 0.3);
+      .style('opacity', d => d.type === 'post-post' ? 0.3 : 0.15);
 
-    labelElements
-      .filter('.post')
-      .classed('visible', false);
+    labelElements.filter('.post').classed('visible', false);
 
-    // Clear filtered state visual indicators
     d3.select('#network-graph-container').classed('filtered', false);
     d3.select('#reset-graph')
       .classed('active', false)
       .text('Reset View');
 
-    // Announce reset
-    announceFilterState('Showing all posts and tags');
+    // Reset zoom
+    svg.transition()
+      .duration(400)
+      .call(zoomBehavior.transform, d3.zoomIdentity);
 
-    // Reset sidebar filter to "all" (for explore page integration)
     if (window.exploreFilters && typeof window.exploreFilters.updateFromNetwork === 'function') {
       const allButton = document.querySelector('.tag-filter[data-tag="all"]');
       if (allButton && !allButton.classList.contains('active')) {
@@ -562,13 +595,11 @@
       }
     }
 
-    // Restart simulation briefly to settle layout
     if (simulation) {
       simulation.alpha(0.1).restart();
     }
   }
 
-  // Utility functions
   function showStatus(message) {
     const statusEl = document.querySelector('.loading-message');
     if (statusEl) {
@@ -580,7 +611,6 @@
   function showError(message) {
     const errorEl = document.querySelector('.error-message');
     const loadingEl = document.querySelector('.loading-message');
-
     if (errorEl && loadingEl) {
       loadingEl.style.display = 'none';
       errorEl.textContent = message;
@@ -588,15 +618,17 @@
     }
   }
 
-  // Handle window resize
   function handleResize() {
     if (!svg) return;
 
-    const rect = svg.node().getBoundingClientRect();
-    width = rect.width || 800;
-    height = rect.height || 500;
+    const parentRect = svg.node().parentElement.getBoundingClientRect();
+    width = parentRect.width || 800;
+    height = parentRect.height || 500;
 
-    svg.attr('viewBox', `0 0 ${width} ${height}`);
+    svg
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', `0 0 ${width} ${height}`);
 
     if (simulation) {
       simulation
@@ -606,24 +638,20 @@
     }
   }
 
-  // Cleanup function
   function cleanup() {
     if (simulation) {
       simulation.stop();
       simulation = null;
     }
-
     window.removeEventListener('resize', handleResize);
     window.removeEventListener('beforeunload', cleanup);
   }
 
-  // External API for integration with explore page filters
   function highlightNode(nodeId, active) {
-    const node = nodes.find(n => n.id === nodeId);
+    const node = nodeMap.get(nodeId);
     if (node && nodeElements) {
       const nodeElement = nodeElements.filter(d => d.id === nodeId).node();
       if (nodeElement) {
-        // Simulate hover effect for external highlighting
         if (active) {
           handleNodeHover({ currentTarget: nodeElement }, node);
         } else {
@@ -633,30 +661,30 @@
     }
   }
 
-  // Update sidebar filter (for explore page integration)
   function updateSidebarFilter(tagId) {
-    // Use explore filters API to prevent circular triggering
     if (window.exploreFilters && typeof window.exploreFilters.updateFromNetwork === 'function') {
       window.exploreFilters.updateFromNetwork(tagId);
     }
   }
 
-  // Expose API for external access
+  // Expose API
   window.networkGraph = {
     filterByTag: filterByTag,
     filterByPosts: filterByPosts,
     resetGraph: resetGraph,
-    highlightNode: highlightNode
+    highlightNode: highlightNode,
+    selectPost: function(postId) {
+      const node = nodeMap.get(postId);
+      if (node && node.type === 'post') selectPost(node);
+    }
   };
 
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // Event listeners
   window.addEventListener('resize', handleResize);
   window.addEventListener('beforeunload', cleanup);
 

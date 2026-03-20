@@ -30,9 +30,9 @@ permalink: /explore/
         </svg>
       </div>
 
-      <!-- Loading and status -->
+      <!-- Loading and error only -->
       <div class="graph-status" aria-live="polite" aria-atomic="true">
-        <span class="loading-message">Loading network graph...</span>
+        <span class="loading-message">Loading...</span>
         <span class="error-message" style="display: none;">
           Failed to load graph data
         </span>
@@ -51,7 +51,6 @@ permalink: /explore/
             autocomplete="off"
             aria-label="Search post content"
           >
-          <button type="button" class="clear-search-btn" id="clear-search-btn" style="display: none;">clear</button>
         </div>
 
         <div class="search-status" id="search-status" style="display: none;">
@@ -62,8 +61,12 @@ permalink: /explore/
       <ul class="post-list-compact" id="post-list">
         {% for post in collections.posts %}
         <li data-tags="{{ post.data.tags | join(',') }}" data-id="{{ post.fileSlug }}">
-          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-          <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+          <span class="post-title">{{ post.data.title }}</span>
+          <span class="post-meta-row">
+            <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+            <span class="post-meta-divider">|</span>
+            <a href="{{ post.url | url }}" class="go-to-post-link">go to post</a>
+          </span>
         </li>
         {% endfor %}
       </ul>
