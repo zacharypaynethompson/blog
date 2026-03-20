@@ -609,10 +609,10 @@
   }
 
   function showError(message) {
+    const statusContainer = document.querySelector('.graph-status');
     const errorEl = document.querySelector('.error-message');
-    const loadingEl = document.querySelector('.loading-message');
-    if (errorEl && loadingEl) {
-      loadingEl.style.display = 'none';
+    if (statusContainer && errorEl) {
+      statusContainer.style.display = '';
       errorEl.textContent = message;
       errorEl.style.display = 'inline';
     }
