@@ -24,6 +24,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
   {% block head %}{% endblock %}
 </head>
 <body data-path-prefix="{{ '/' | url }}">
@@ -36,6 +42,7 @@
   {% include "partials/footer.njk" %}
 
   <script src="{{ '/assets/js/typewriter-logo.js' | url }}"></script>
+  <script src="{{ '/assets/js/theme-toggle.js' | url }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

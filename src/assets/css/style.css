@@ -40,6 +40,113 @@
 }
 
 /* ==========================================================================
+   Dark Theme (T060)
+   ========================================================================== */
+
+[data-theme="dark"] {
+  --color-bg: #1a1a1a;
+  --color-text: #E0DCD7;
+  --color-text-secondary: #A09A93;
+  --color-accent: #E8923A;
+  --color-accent-hover: #F0A85C;
+  --color-border: #333330;
+  --texture-opacity: 0.008;
+  --gradient-opacity: 0.004;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #1a1a1a;
+    --color-text: #E0DCD7;
+    --color-text-secondary: #A09A93;
+    --color-accent: #E8923A;
+    --color-accent-hover: #F0A85C;
+    --color-border: #333330;
+    --texture-opacity: 0.008;
+    --gradient-opacity: 0.004;
+  }
+}
+
+/* Dark mode toggle button */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1;
+  transition: border-color 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+/* Show moon in light mode (click to go dark) */
+.theme-toggle .icon-moon { display: inline; }
+.theme-toggle .icon-sun { display: none; }
+
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: inline; }
+}
+
+/* Dark mode overrides for hardcoded colors */
+[data-theme="dark"] .post-content blockquote {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .post-content p code {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .site-header::after {
+  background: linear-gradient(
+    to right,
+    rgba(26, 26, 26, 0.8),
+    rgba(232, 146, 58, var(--gradient-opacity)) 50%,
+    rgba(26, 26, 26, 0.8)
+  );
+}
+
+[data-theme="dark"] .search-results {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .post-content blockquote {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+  :root:not([data-theme="light"]) .post-content p code {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  :root:not([data-theme="light"]) .site-header::after {
+    background: linear-gradient(
+      to right,
+      rgba(26, 26, 26, 0.8),
+      rgba(232, 146, 58, var(--gradient-opacity)) 50%,
+      rgba(26, 26, 26, 0.8)
+    );
+  }
+  :root:not([data-theme="light"]) .search-results {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ==========================================================================
    Base Styles & Typography (T011)
    ========================================================================== */
 
@@ -316,6 +423,16 @@ main {
   font-family: 'SF Mono', Monaco, Consolas, monospace;
   font-size: 0.9rem;
   line-height: 1.4;
+}
+
+[data-theme="dark"] .post-content pre {
+  background-color: #111;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .post-content pre {
+    background-color: #111;
+  }
 }
 
 .post-content code {
