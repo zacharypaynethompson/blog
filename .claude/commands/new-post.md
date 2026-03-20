@@ -134,12 +134,28 @@ When listing related points, use comma-separated clauses or "e.g.," rather than 
 - Yes: "E.g., User requirements naturally surface, edge cases get raised, someone explains the business constraint."
 - No: "The basic idea is simple: dump everything into one place"
 - Yes: "The basic idea is you dump everything into one place"
+- No: "Job adverts are proxies for job activity. Company descriptions are proxies for what a firm actually does. Patents are proxies for innovation."
+- Yes: "For example: job adverts are proxies for job activity, company descriptions are proxies for what a firm actually does, patents are proxies for innovation."
 
 ### 9. Generic over branded
 Use generic terms where a brand name isn't necessary.
 
 - No: "It lives in meetings, in Slack threads, in conversations"
 - Yes: "It lives in meetings, message threads and conversations"
+- No: "Stata versions. GPT doesn't."
+- Yes: "Stata versions, proprietary LLMs don't." (generalise from specific product to category when the brand isn't the point)
+
+### 10. Substantive over evaluative
+Explain what's wrong rather than labelling it with a pithy judgment. State the problem, not your verdict on it.
+
+- No: "I think that's backwards."
+- Yes: "I think that misses the major challenges involved in classification."
+
+### 11. Signal digressions
+When making a tangential point, break it into its own paragraph and mark it explicitly rather than embedding it in a dense paragraph.
+
+- No: (Stata analogy critique buried mid-paragraph after the main point about methodology)
+- Yes: "As an aside, the paper compares GABRIEL to Stata..." (own paragraph, clearly marked as a digression)
 
 ## Formatting notes
 
