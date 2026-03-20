@@ -42,7 +42,29 @@
   {% include "partials/footer.njk" %}
 
   <script src="{{ '/assets/js/typewriter-logo.js' | url }}"></script>
-  <script src="{{ '/assets/js/theme-toggle.js' | url }}"></script>
+  <script>
+    (function () {
+      var toggle = document.querySelector('.theme-toggle');
+      if (!toggle) return;
+      var icon = toggle.querySelector('.theme-icon');
+      function isDark() {
+        var t = document.documentElement.getAttribute('data-theme');
+        if (t === 'dark') return true;
+        if (t === 'light') return false;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      function updateIcon() {
+        if (icon) icon.textContent = isDark() ? '\u263C' : '\u263E';
+      }
+      updateIcon();
+      toggle.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcon();
+      });
+    })();
+  </script>
   {% block scripts %}{% endblock %}
 </body>
 </html>
