@@ -15,7 +15,7 @@ module.exports = function(eleventyConfig) {
   // Tags collection (T014)
   eleventyConfig.addCollection("tagList", function(collectionApi) {
     const tagSet = new Set();
-    const excludedTags = ["posts", "all", "tagList", "graphData"];
+    const excludedTags = ["posts", "all", "tagList", "graphData", "networkGraphData", "searchIndex"];
     collectionApi.getAll().forEach(item => {
       if (item.data.tags) {
         item.data.tags.forEach(tag => {
@@ -142,6 +142,29 @@ module.exports = function(eleventyConfig) {
         tagCount: tagNodes.length
       }
     };
+  });
+
+  // Search index for full-text content search
+  eleventyConfig.addCollection("searchIndex", function(collectionApi) {
+    const fs = require('fs');
+    const posts = collectionApi.getFilteredByGlob("src/posts/*.md");
+    return posts.map(post => {
+      // Read raw markdown and strip frontmatter
+      let content = '';
+      try {
+        const raw = fs.readFileSync(post.inputPath, 'utf-8');
+        content = raw.replace(/^---[\s\S]*?---\s*/, '').replace(/\s+/g, ' ').trim();
+      } catch (e) {
+        content = '';
+      }
+      return {
+        id: post.fileSlug,
+        title: post.data.title,
+        tags: (post.data.tags || []).filter(t => t !== 'posts'),
+        url: post.url,
+        content: content
+      };
+    });
   });
 
   // Date filter for templates
