@@ -40,7 +40,40 @@ The layer that gets the least attention is what I think of as logistics: making 
 
 GABRIEL, too, makes it trivially easy to classify at scale, which means two teams can independently produce incompatible datasets using different definitions and never notice, because the outputs look clean and numeric either way. The tool returns confident scores regardless of whether the upstream definitional work was done.
 
-<!-- DIAGRAM: Three stacked layers — methodology (bottom, labelled "solved"), data (middle, labelled "proxy validity"), logistics (top, labelled "definitional alignment"). Arrow pointing up with label "where the actual work is". Maybe show two teams with different definitions feeding into the same tool and getting divergent but clean-looking outputs. -->
+<svg viewBox="0 0 600 370" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;margin:1.5rem auto;display:block;font-family:'Roboto Slab',Georgia,serif;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D2691E"/>
+    </marker>
+  </defs>
+  <rect x="120" y="10" width="280" height="54" rx="4" fill="none" stroke="#D2691E" stroke-width="1.5"/>
+  <text x="260" y="30" text-anchor="middle" font-size="13" fill="#2D2D2D" font-weight="700">logistics</text>
+  <text x="260" y="48" text-anchor="middle" font-size="11" fill="#5C5C5C">definitional alignment</text>
+  <rect x="120" y="74" width="280" height="54" rx="4" fill="none" stroke="#D2691E" stroke-width="1.5"/>
+  <text x="260" y="94" text-anchor="middle" font-size="13" fill="#2D2D2D" font-weight="700">data</text>
+  <text x="260" y="112" text-anchor="middle" font-size="11" fill="#5C5C5C">proxy validity</text>
+  <rect x="120" y="138" width="280" height="54" rx="4" fill="none" stroke="#E8E4DF" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="260" y="158" text-anchor="middle" font-size="13" fill="#5C5C5C" font-weight="700">methodology</text>
+  <text x="260" y="176" text-anchor="middle" font-size="11" fill="#5C5C5C">largely solved by LLMs</text>
+  <line x1="420" y1="165" x2="420" y2="37" stroke="#D2691E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="432" y="105" font-size="10" fill="#D2691E" font-style="italic">where the</text>
+  <text x="432" y="117" font-size="10" fill="#D2691E" font-style="italic">work is</text>
+  <rect x="140" y="228" width="120" height="44" rx="4" fill="none" stroke="#E8E4DF" stroke-width="1.5"/>
+  <text x="200" y="247" text-anchor="middle" font-size="11" fill="#2D2D2D" font-weight="700">team A</text>
+  <text x="200" y="263" text-anchor="middle" font-size="10" fill="#5C5C5C">definition X</text>
+  <rect x="280" y="228" width="120" height="44" rx="4" fill="none" stroke="#E8E4DF" stroke-width="1.5"/>
+  <text x="340" y="247" text-anchor="middle" font-size="11" fill="#2D2D2D" font-weight="700">team B</text>
+  <text x="340" y="263" text-anchor="middle" font-size="10" fill="#5C5C5C">definition Y</text>
+  <line x1="200" y1="272" x2="240" y2="305" stroke="#D2691E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="340" y1="272" x2="300" y2="305" stroke="#D2691E" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="210" y="305" width="120" height="44" rx="4" fill="none" stroke="#E8E4DF" stroke-width="1.5"/>
+  <text x="270" y="324" text-anchor="middle" font-size="11" fill="#2D2D2D" font-weight="700">same tool</text>
+  <text x="270" y="340" text-anchor="middle" font-size="10" fill="#5C5C5C">clean, numeric outputs</text>
+  <line x1="240" y1="349" x2="200" y2="362" stroke="#D2691E" stroke-width="1.5"/>
+  <line x1="300" y1="349" x2="340" y2="362" stroke="#D2691E" stroke-width="1.5"/>
+  <text x="180" y="362" text-anchor="middle" font-size="10" fill="#D2691E" font-style="italic">result A</text>
+  <text x="360" y="362" text-anchor="middle" font-size="10" fill="#D2691E" font-style="italic">result B</text>
+</svg>
 
 This also means there are always more classes than you think. If you have eight sectors you want to classify firms into, you actually have ten: the eight sectors, plus "insufficient information to classify" and "doesn't fit any of these categories." When you're classifying the whole economy into strategic sectors, you're going to find that most firms don't fit cleanly into any of them, or there isn't enough data to make the call. Understanding the dynamics between what fits your definitions and what doesn't is itself a significant piece of analytical work.
 
