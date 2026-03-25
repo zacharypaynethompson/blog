@@ -26,7 +26,7 @@ A tool called [SpecKit](https://github.com/github/spec-kit) formalises this into
 4. **Tasks**: a breakdown of the plan into discrete, ordered units of work that can be implemented independently.
 5. **Implementation**: code generation from the tasks, where AI does the mechanical translation and the human verifies that the output matches the spec.
 
-Each step constrains the next. The constitution constrains specifications, specifications constrain plans, plans constrain tasks. By the time you reach implementation, most of the decisions have already been made and documented. The isea being that you limit the extent to which AI makes judgment calls, and rather only executes well-defined instructions.
+Each step constrains the next. The constitution constrains specifications, specifications constrain plans, plans constrain tasks. By the time you reach implementation, most of the decisions have already been made and documented. The idea being that you limit the extent to which AI makes judgment calls, and rather only executes well-defined instructions.
 
 ## how this blog uses it
 
@@ -65,6 +65,7 @@ In specification-driven development, the workflow is constitution, specification
 <div class="stepper-card-body">
 <h4>context and orientation</h4>
 <p>What's the question, why does it matter, what's already known, what data exists. This is the equivalent of understanding user requirements before writing a spec, except analytical questions sit in a messier landscape of prior evidence, institutional context, and political sensitivity.</p>
+<p class="stepper-example"><em>Say a government department wants to understand whether firms that adopt new technologies become more productive, because they're designing a support programme for technology adoption. The immediate instinct is to regress some productivity measure on some technology adoption measure and see what happens. But this step forces you to slow down. What problem is the department actually trying to solve? They want to know which firms to target and what kinds of adoption to support, which is not the same question as "does technology cause productivity." And what do you even mean by productivity? Revenue per employee doesn't account for input quality, capital intensity, or whether revenue growth reflects price increases rather than real output. This step is about surfacing the gap between the question you think you're asking and the question you can actually answer.</em></p>
 </div>
 </div>
 <div class="stepper-card" data-step="1">
@@ -72,6 +73,7 @@ In specification-driven development, the workflow is constitution, specification
 <div class="stepper-card-body">
 <h4>exploration</h4>
 <p>Engage with the data before committing to an approach. This is not always as prevalent in software development, where you generally know what you're building before you start specifying (though exploration of data is often done in the process of understanding user requirements). In analysis, you often don't know what question you <em>can</em> actually answer until you've seen what the data contains.</p>
+<p class="stepper-example"><em>You look at the data. What does "technology adoption" mean in this dataset, is it a binary flag, a spending figure, a self-reported survey response? You notice the firms in the data skew large, or that the technology adoption variable is only available for firms that responded to a voluntary survey. That's selection bias, the firms that respond are probably already different from those that don't in ways that correlate with productivity. You also notice the productivity measures available are limited, you have revenue and headcount but not intermediate inputs, so total factor productivity is off the table. The data is already shaping what question you can credibly answer, and you haven't run a single regression yet.</em></p>
 </div>
 </div>
 <div class="stepper-card" data-step="2">
@@ -79,6 +81,7 @@ In specification-driven development, the workflow is constitution, specification
 <div class="stepper-card-body">
 <h4>analytical specification</h4>
 <p>The core artefact. What exactly will you analyse, how, and why. Your identification strategy, your model specification, your expected results, your robustness plan, your limitations. Written and reviewed before any estimation is conducted. This is the direct analogue of the software specification, and likely where most of the value is in this paradigm.</p>
+<p class="stepper-example"><em>Now you write down precisely what you'll estimate. Your outcome variable is revenue per employee (acknowledged as a crude proxy). Your treatment is whether a firm reports adopting a specific class of technology. You document your identification strategy, maybe a difference-in-differences design exploiting a policy change that encouraged adoption in certain sectors. You write down what you expect to find, probably a modest positive effect, likely larger for smaller firms. You document the threats: selection into adoption is non-random, the productivity proxy is noisy, the survey response bias means your sample isn't representative. You specify your robustness checks, e.g., alternative productivity measures, different sample restrictions, placebo tests. All of this is written and reviewable before you estimate anything.</em></p>
 </div>
 </div>
 <div class="stepper-card" data-step="3">
@@ -86,6 +89,7 @@ In specification-driven development, the workflow is constitution, specification
 <div class="stepper-card-body">
 <h4>implementation planning and execution</h4>
 <p>Translating the specification into code. This is where AI adds the most obvious value. Given a detailed analytical specification, code generation is close to mechanical.</p>
+<p class="stepper-example"><em>Given the specification, the code is close to mechanical. AI can generate the data cleaning pipeline, the estimation code, the robustness checks. The specification has already made the decisions, this step just executes them.</em></p>
 </div>
 </div>
 <div class="stepper-card" data-step="4">
@@ -93,6 +97,7 @@ In specification-driven development, the workflow is constitution, specification
 <div class="stepper-card-body">
 <h4>interpretation and sense-checking</h4>
 <p>Examining results against expectations and domain knowledge. This is something software doesn't really have an equivalent for. "The code passes its tests" is sufficient for software. "The code ran and produced numbers" is only the beginning for analysis.</p>
+<p class="stepper-example"><em>Your main estimate shows a 12% productivity premium for adopters. Is that plausible? You compare it to the literature, most studies find effects in the 5-15% range, so it's in the right ballpark. But your robustness checks show the effect disappears when you restrict to firms that responded to both waves of the survey. That's a red flag, it suggests your result might be driven by differential attrition rather than a real treatment effect. Without the documented expectations from the specification step, you might have just reported the 12% headline figure and moved on.</em></p>
 </div>
 </div>
 <div class="stepper-card" data-step="5">
@@ -100,18 +105,19 @@ In specification-driven development, the workflow is constitution, specification
 <div class="stepper-card-body">
 <h4>documentation</h4>
 <p>Packaging the analysis for its audience and preserving the reasoning for future reference (though this should really happen throughout the entire process).</p>
+<p class="stepper-example"><em>You write up not just the results but the reasoning chain: why you chose this specification, what alternatives you considered, what the limitations are, and what the department should and shouldn't conclude from this. The specification from step three becomes the backbone of this write-up.</em></p>
 </div>
 </div>
 </div>
 </div>
 <noscript>
 
-1. **Context and orientation**: what's the question, why does it matter, what's already known, what data exists. This is the equivalent of understanding user requirements before writing a spec, except analytical questions sit in a messier landscape of prior evidence, institutional context, and political sensitivity.
-2. **Exploration**: engage with the data before committing to an approach. This is not always as prevalent in software development, where you generally know what you're building before you start specifying (though exploration of data is often done in the process of understanding user requirements). In analysis, you often don't know what question you *can* actually answer until you've seen what the data contains.
-3. **Analytical specification**: the core artefact. What exactly will you analyse, how, and why. Your identification strategy, your model specification, your expected results, your robustness plan, your limitations. Written and reviewed before any estimation is conducted. This is the direct analogue of the software specification, and likely where most of the value is in this paradigm.
-4. **Implementation planning and execution**: translating the specification into code. This is where AI adds the most obvious value. Given a detailed analytical specification, code generation is close to mechanical.
-5. **Interpretation and sense-checking**: examining results against expectations and domain knowledge. This is something software doesn't really have an equivalent for. "The code passes its tests" is sufficient for software. "The code ran and produced numbers" is only the beginning for analysis.
-6. **Documentation**: packaging the analysis for its audience and preserving the reasoning for future reference (though this should really happen throughout the entire process).
+1. **Context and orientation**: what's the question, why does it matter, what's already known, what data exists. This is the equivalent of understanding user requirements before writing a spec, except analytical questions sit in a messier landscape of prior evidence, institutional context, and political sensitivity. *Say a government department wants to understand whether firms that adopt new technologies become more productive, because they're designing a support programme for technology adoption. The immediate instinct is to regress some productivity measure on some technology adoption measure and see what happens. But this step forces you to slow down. What problem is the department actually trying to solve? They want to know which firms to target and what kinds of adoption to support, which is not the same question as "does technology cause productivity." And what do you even mean by productivity? Revenue per employee doesn't account for input quality, capital intensity, or whether revenue growth reflects price increases rather than real output. This step is about surfacing the gap between the question you think you're asking and the question you can actually answer.*
+2. **Exploration**: engage with the data before committing to an approach. This is not always as prevalent in software development, where you generally know what you're building before you start specifying (though exploration of data is often done in the process of understanding user requirements). In analysis, you often don't know what question you *can* actually answer until you've seen what the data contains. *You look at the data. What does "technology adoption" mean in this dataset, is it a binary flag, a spending figure, a self-reported survey response? You notice the firms in the data skew large, or that the technology adoption variable is only available for firms that responded to a voluntary survey. That's selection bias, the firms that respond are probably already different from those that don't in ways that correlate with productivity. You also notice the productivity measures available are limited, you have revenue and headcount but not intermediate inputs, so total factor productivity is off the table. The data is already shaping what question you can credibly answer, and you haven't run a single regression yet.*
+3. **Analytical specification**: the core artefact. What exactly will you analyse, how, and why. Your identification strategy, your model specification, your expected results, your robustness plan, your limitations. Written and reviewed before any estimation is conducted. This is the direct analogue of the software specification, and likely where most of the value is in this paradigm. *Now you write down precisely what you'll estimate. Your outcome variable is revenue per employee (acknowledged as a crude proxy). Your treatment is whether a firm reports adopting a specific class of technology. You document your identification strategy, maybe a difference-in-differences design exploiting a policy change that encouraged adoption in certain sectors. You write down what you expect to find, probably a modest positive effect, likely larger for smaller firms. You document the threats: selection into adoption is non-random, the productivity proxy is noisy, the survey response bias means your sample isn't representative. You specify your robustness checks, e.g., alternative productivity measures, different sample restrictions, placebo tests. All of this is written and reviewable before you estimate anything.*
+4. **Implementation planning and execution**: translating the specification into code. This is where AI adds the most obvious value. Given a detailed analytical specification, code generation is close to mechanical. *Given the specification, the code is close to mechanical. AI can generate the data cleaning pipeline, the estimation code, the robustness checks. The specification has already made the decisions, this step just executes them.*
+5. **Interpretation and sense-checking**: examining results against expectations and domain knowledge. This is something software doesn't really have an equivalent for. "The code passes its tests" is sufficient for software. "The code ran and produced numbers" is only the beginning for analysis. *Your main estimate shows a 12% productivity premium for adopters. Is that plausible? You compare it to the literature, most studies find effects in the 5-15% range, so it's in the right ballpark. But your robustness checks show the effect disappears when you restrict to firms that responded to both waves of the survey. That's a red flag, it suggests your result might be driven by differential attrition rather than a real treatment effect. Without the documented expectations from the specification step, you might have just reported the 12% headline figure and moved on.*
+6. **Documentation**: packaging the analysis for its audience and preserving the reasoning for future reference (though this should really happen throughout the entire process). *You write up not just the results but the reasoning chain: why you chose this specification, what alternatives you considered, what the limitations are, and what the department should and shouldn't conclude from this. The specification from step three becomes the backbone of this write-up.*
 
 </noscript>
 <style>
@@ -235,6 +241,12 @@ In specification-driven development, the workflow is constitution, specification
   color: var(--color-text-secondary);
   line-height: var(--line-height);
 }
+.stepper-card-body p.stepper-example {
+  margin-top: var(--space-xs);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
 /* Plain text mode */
 .analysis-stepper.plain-text .stepper-cards {
   min-height: auto;
@@ -313,6 +325,8 @@ The analytical specification, step three, is where I think the real leverage is.
 
 There's also a useful parallel with the constitution concept from specification-driven development. In software, the constitution captures shared principles, e.g., architectural patterns, quality standards. For analysis, the equivalent would be something like shared epistemic standards: document your reasoning before running estimations, distinguish explicitly between exploratory and confirmatory work, state your limitations honestly and specifically rather than with generic caveats.
 
-Analytical problems are less decomposable as the question often evolves as you engage with the data. For example, exploration is a core part of the workflow, not a sign that the specification wasn't detailed enough. The "correct" approach is often genuinely contested in ways that software rarely is and results require sense-checking against domain knowledge, which is a form of judgment that can't be automated or specified away. A specification-driven analysis workflow would need to be more iterative, more flexible, and more reliant on human judgment than its software counterpart.
+A tension here is that analytical problems are less decomposable than software problems, as the question often evolves as you engage with the data. Exploration is a core part of the workflow, not a sign that the specification wasn't detailed enough. The "correct" approach is often genuinely contested in ways that software rarely is, and results require sense-checking against domain knowledge, which is a form of judgment that can't be automated or specified away. A specification-driven analysis workflow would need to be more iterative, more flexible, and more reliant on human judgment than its software counterpart. I think the specification-driven framing still holds, but how exactly to handle the loops between exploration and specification is something I haven't fully worked out yet.
 
 What's similar is that AI makes the mechanical part of analysis nearly free. The value is almost entirely in the reasoning: formulating good questions, choosing appropriate methods, interpreting results critically, understanding what the data can and cannot tell you. Any workflow that doesn't put the reasoning first is probably leaving most of that value on the table, and any workflow that makes the reasoning explicit and reviewable is probably going to produce better analysis than one that leaves it in the analyst's head.
+
+I think there's something worth exploring here in more detail, particularly around what a concrete specification-driven analysis workflow would actually look like in practice, how the iteration between exploration and specification works, and what the tooling implications are. I'll try to work through that in a subsequent post.
