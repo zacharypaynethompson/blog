@@ -1,80 +1,52 @@
-# Quickstart: Title Animation Variants
+# Quickstart: Network Constellation Title Animation
 
 **Date**: 2026-03-26
 **Feature**: 005-title-animation-variants
 
 ## Overview
 
-Replace the current typewriter animation on the "zacsblog" nav logo with a system supporting 4 animation variants: "pull-up" (letters rise from behind), "neural-resolve" (characters scramble then resolve), "gradient-descent" (letters converge from scattered positions), and "network" (constellation-style convergence with SVG edges — production default).
+The "zacsblog" nav logo animates on page load with a constellation network effect: letters scatter, converge via damped spring physics, while SVG edges connect nearby pairs. Replaces the old typewriter animation.
 
-## Files to Modify
+## Files Changed
 
 | File | Action | Purpose |
 |------|--------|---------|
-| `src/assets/js/typewriter-logo.js` | **Replace** → `title-animation.js` | New animation engine with variant system |
-| `src/assets/css/style.css` | **Edit** | Replace typewriter CSS (lines 926-969) with new animation styles |
-| `src/_includes/partials/nav.njk` | **Edit** | Update data attributes on nav logo |
-| `src/_includes/layouts/base.njk` | **Edit** | Update script reference from typewriter-logo.js to title-animation.js |
-
-## Files to Create
-
-| File | Purpose |
-|------|---------|
-| `src/assets/js/title-animation.js` | Animation engine: letter splitting, variant registry, observer, 3 variant functions |
-
-## Files to Delete
-
-| File | Reason |
-|------|--------|
-| `src/assets/js/typewriter-logo.js` | Replaced by title-animation.js |
+| `src/assets/js/title-animation.js` | **Created** | Constellation network animation (~200 lines) |
+| `src/assets/js/typewriter-logo.js` | **Deleted** | Replaced by title-animation.js |
+| `src/assets/css/style.css` | **Modified** | Letter styles, color classes, reduced-motion rule |
+| `src/_includes/partials/nav.njk` | **Modified** | `data-animation data-accent-start="4"` on nav logo |
+| `src/_includes/layouts/base.njk` | **Modified** | Script reference updated |
 
 ## Architecture
 
 ```
-nav.njk (data-animation="network" data-accent-start="4")
+nav.njk (<a class="nav-logo" data-animation data-accent-start="4">zacsblog</a>)
     │
     ▼
 title-animation.js
-    ├── init()           — query selector, read config, IntersectionObserver
-    ├── splitLetters()   — create span per character with color classes
-    ├── resolveVariant() — URL param override or data attribute default
-    └── variants = {
-          "pull-up":           pullUpAnimate(letters),
-          "neural-resolve":    neuralResolveAnimate(letters),
-          "gradient-descent":  gradientDescentAnimate(letters),
-          "network":           networkAnimate(letters, container)
-        }
+    ├── init()           — querySelectorAll [data-animation], IntersectionObserver
+    ├── splitLetters()   — create <span> per character with color classes, set aria-label
+    └── animate()        — spring physics simulation with SVG edge overlay
+         ├── Physics:    spring=0.015, damping=0.90, stagger=40ms/letter
+         ├── Edges:      SVG <line> elements, distance-based opacity (max 0.35)
+         ├── Arrival:    letter within 3px → mark arrived → edges fade when both arrive
+         └── Settle:     letter < 0.3px + velocity < 0.1 → snap to final state
 ```
 
-## Key Decisions
-
-1. **Single file, no modules** — all variants in one file (~150-200 lines), matching project's existing JS pattern
-2. **URL param for preview** — `?animation=pull-up` overrides the default for easy A/B comparison
-3. **CSS transforms only** — GPU-accelerated, no canvas, no SVG, no external dependencies
-4. **Preserve color split pattern** — `title-char-normal` / `title-char-accent` classes (renamed from `tw-*`)
-5. **Data attribute for production default** — single-line template change to switch the deployed variant
-
-## Preview Workflow
+## Verification
 
 ```bash
 npm run dev
-# Open http://localhost:8080/?animation=pull-up
-# Open http://localhost:8080/?animation=neural-resolve
-# Open http://localhost:8080/?animation=gradient-descent
-# Open http://localhost:8080/?animation=network        ← production default
-# Compare side-by-side, pick favorite, set as data-animation in nav.njk
+# Open http://localhost:8080/blog/
+# Observe: letters scatter → converge with spring wobble → edges fade → title settles
+# Toggle dark mode: colors should update correctly
+# Enable prefers-reduced-motion: title should appear instantly, no animation
 ```
 
-## Variant Descriptions
+## Key Design Decisions
 
-### 1. Pull-Up (`pull-up`)
-Each letter is wrapped in an overflow-hidden container. Letters start translated downward (invisible behind the clip edge) and rise upward into position with a staggered delay and ease-out overshoot.
-
-### 2. Neural Resolve (`neural-resolve`)
-Each letter starts visible but displaying rapidly cycling random characters. After a staggered delay, each letter "locks in" to its correct character — like a neural network converging from noise to prediction.
-
-### 3. Gradient Descent (`gradient-descent`)
-Each letter starts at a random offset position (scattered) with 0 opacity. Letters simultaneously move toward their correct position following a smooth curve with slight wobble, fading in as they converge — evoking optimization convergence.
-
-### 4. Network (`network`) — Production Default
-Letters start scattered (like gradient-descent) and converge to their final positions while thin SVG edges connect nearby letter pairs — a living constellation graph that collapses into the title text. Edge opacity is distance-based and fades acceleratedly as letters settle. Matches the visual DNA of the hero physics banner.
+1. **Damped spring physics** — matches hero-physics.js model for visual consistency
+2. **Inline SVG edges** — lightweight, theme-aware, trivially removable from DOM
+3. **Arrival-based edge fade** — edges disappear when both connected letters first reach destination, not when fully settled
+4. **Single file, no modules** — ~200 lines, IIFE pattern matching project conventions
+5. **Zero dependencies** — vanilla JS + inline SVG, no libraries

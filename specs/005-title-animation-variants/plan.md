@@ -1,83 +1,69 @@
-# Implementation Plan: Title Animation Variants
+# Implementation Plan: Network Constellation Title Animation
 
 **Branch**: `005-title-animation-variants` | **Date**: 2026-03-26 | **Spec**: [spec.md](spec.md)
 **Input**: Feature specification from `/specs/005-title-animation-variants/spec.md`
 
 ## Summary
 
-Replace the current typewriter animation on the "zacsblog" nav logo with a variant system offering 4 animations: **Pull-Up** (letters rise from behind a clipped surface), **Neural Resolve** (characters scramble then lock in), **Gradient Descent** (letters converge from scattered positions), and **Network** (constellation-inspired convergence with live SVG connecting edges — selected as production default). A URL parameter preview mechanism (`?animation=variant-name`) lets the blog owner compare variants side-by-side.
+Replace the typewriter animation on the "zacsblog" nav logo with a constellation-inspired network animation. Letters start scattered at random positions and converge using damped spring physics (spring: 0.015, damping: 0.90) while SVG edges connect nearby letters with distance-based opacity. Edges fade rapidly when both endpoints arrive. Matches the hero physics banner's visual DNA.
 
 ## Technical Context
 
 **Language/Version**: JavaScript ES2020+ (browser), CSS3, Nunjucks templates
-**Primary Dependencies**: None (vanilla JS, CSS animations/transforms — no new dependencies)
+**Primary Dependencies**: None (vanilla JS, inline SVG — no new dependencies)
 **Storage**: N/A
 **Testing**: Vitest (unit), html-validate (lint), manual visual verification
 **Target Platform**: Modern evergreen browsers (Chrome, Firefox, Safari, Edge — latest 2 versions)
 **Project Type**: Static site (Eleventy 2.x)
-**Performance Goals**: Animations complete in < 2s, 60fps during animation, no layout shift (CLS < 0.1)
-**Constraints**: No canvas/SVG for title animation, no new external dependencies, single JS file
-**Scale/Scope**: 1 nav element, 8 characters, 3 animation variants
+**Performance Goals**: Animation completes in < 2s, 60fps during spring simulation, no layout shift (CLS < 0.1)
+**Constraints**: No external dependencies, single JS file, DOM + inline SVG only
+**Scale/Scope**: 1 nav element, 8 characters, ~15 SVG line elements
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
-
-### Pre-Research Check
-
 | Principle | Status | Notes |
 |-----------|--------|-------|
-| **I. Simplicity First — YAGNI** | PASS | 3 variants is the spec minimum; no extras added |
-| **I. Simplicity First — Minimal Dependencies** | PASS | Zero new dependencies; vanilla JS + CSS only |
-| **I. Simplicity First — Flat Structures** | PASS | Single new JS file replaces single existing file; no new directories |
-| **I. Simplicity First — Single Responsibility** | PASS | One file does one thing: animate the title |
-| **II. Content-Centric — Fast Reads** | PASS | CSS transforms are GPU-accelerated; no impact on page load |
-| **II. Content-Centric — Accessible by Default** | PASS | Respects prefers-reduced-motion; aria-label preserved |
-| **III. Ship Early — MVP Mindset** | PASS | Minimum 3 variants, simple preview mechanism |
-| **III. Ship Early — Working State Always** | PASS | Replacing one JS file + CSS block; site remains functional at every step |
-| **Quality — Performance Budget** | PASS | No layout shift (overflow hidden), no render blocking, < 2s duration |
-
-### Post-Design Check
-
-| Principle | Status | Notes |
-|-----------|--------|-------|
-| **I. Simplicity First — YAGNI** | PASS | No unnecessary abstractions; variants are plain functions in a map |
-| **I. Simplicity First — Minimal Dependencies** | PASS | Confirmed zero new dependencies |
-| **I. Simplicity First — Flat Structures** | PASS | Flat variant map, no class hierarchy or module system |
-| **II. Content-Centric — Fast Reads** | PASS | title-animation.js will be ~150-200 lines; CSS additions ~80 lines |
-| **II. Content-Centric — Accessible by Default** | PASS | Reduced motion disables all animation; screen readers get aria-label |
-| **III. Ship Early — No Big Bang** | PASS | Can implement one variant at a time; each is independently testable |
-
-No violations. Complexity Tracking section not needed.
+| **I. Simplicity First — YAGNI** | PASS | Single animation, no variant system, no config UI |
+| **I. Simplicity First — Minimal Dependencies** | PASS | Zero new dependencies; vanilla JS + inline SVG |
+| **I. Simplicity First — Flat Structures** | PASS | Single JS file replaces single existing file |
+| **I. Simplicity First — Single Responsibility** | PASS | One file does one thing: animate the nav title |
+| **II. Content-Centric — Fast Reads** | PASS | ~200 lines JS, ~20 lines CSS; no render blocking |
+| **II. Content-Centric — Accessible by Default** | PASS | Respects prefers-reduced-motion; aria-label preserved; SVG has aria-hidden |
+| **III. Ship Early — MVP Mindset** | PASS | Single focused animation, no unnecessary features |
+| **III. Ship Early — Working State Always** | PASS | Site functional at every step of replacement |
+| **Quality — Performance Budget** | PASS | 8 DOM elements + ~15 SVG lines via rAF; negligible impact |
 
 ## Project Structure
 
-### Documentation (this feature)
+### Documentation
 
 ```text
 specs/005-title-animation-variants/
-├── plan.md              # This file
-├── research.md          # Phase 0 output
-├── data-model.md        # Phase 1 output
-├── quickstart.md        # Phase 1 output
-└── tasks.md             # Phase 2 output (/speckit.tasks)
+├── spec.md         # Feature specification
+├── plan.md         # This file
+├── research.md     # Technical decisions
+├── data-model.md   # Entity definitions
+├── quickstart.md   # File map and architecture
+└── tasks.md        # Implementation tasks (completed)
 ```
 
-### Source Code (repository root)
+### Source Code
 
 ```text
 src/
 ├── _includes/
 │   ├── layouts/
-│   │   └── base.njk           # EDIT: script src typewriter-logo.js → title-animation.js
+│   │   └── base.njk           # Script reference: title-animation.js
 │   └── partials/
-│       └── nav.njk            # EDIT: update data attributes on nav logo
+│       └── nav.njk            # data-animation data-accent-start="4"
 ├── assets/
 │   ├── css/
-│   │   └── style.css          # EDIT: replace typewriter CSS block with animation variant styles
+│   │   └── style.css          # .title-letter, .title-char-normal/accent, reduced-motion
 │   └── js/
-│       ├── title-animation.js # CREATE: new animation engine (replaces typewriter-logo.js)
-│       └── typewriter-logo.js # DELETE: replaced by title-animation.js
+│       └── title-animation.js # Constellation network animation (~200 lines)
 ```
 
-**Structure Decision**: Existing single-project Eleventy structure. No new directories needed. One file created, one deleted, two edited. This is a surgical replacement within the existing layout.
+**Files changed from baseline**:
+- **Created**: `src/assets/js/title-animation.js`
+- **Deleted**: `src/assets/js/typewriter-logo.js`
+- **Modified**: `src/assets/css/style.css`, `src/_includes/partials/nav.njk`, `src/_includes/layouts/base.njk`
