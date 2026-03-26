@@ -5,7 +5,7 @@
 
 ## Summary
 
-Replace the current typewriter animation on the "zacsblog" nav logo with a variant system offering 3 creative animations: **Pull-Up** (letters rise from behind a clipped surface), **Neural Resolve** (characters scramble then lock in like a neural network converging), and **Gradient Descent** (letters converge from scattered positions). A URL parameter preview mechanism lets the blog owner compare variants side-by-side, with a single data attribute change to set the production default.
+Replace the current typewriter animation on the "zacsblog" nav logo with a variant system offering 4 animations: **Pull-Up** (letters rise from behind a clipped surface), **Neural Resolve** (characters scramble then lock in), **Gradient Descent** (letters converge from scattered positions), and **Network** (constellation-inspired convergence with live SVG connecting edges — selected as production default). A URL parameter preview mechanism (`?animation=variant-name`) lets the blog owner compare variants side-by-side.
 
 ## Technical Context
 

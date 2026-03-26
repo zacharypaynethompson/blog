@@ -5,7 +5,7 @@
 
 ## Overview
 
-Replace the current typewriter animation on the "zacsblog" nav logo with a system supporting 3 animation variants: "pull-up" (letters rise from behind), "neural-resolve" (characters scramble then resolve), and "gradient-descent" (letters converge from scattered positions).
+Replace the current typewriter animation on the "zacsblog" nav logo with a system supporting 4 animation variants: "pull-up" (letters rise from behind), "neural-resolve" (characters scramble then resolve), "gradient-descent" (letters converge from scattered positions), and "network" (constellation-style convergence with SVG edges — production default).
 
 ## Files to Modify
 
@@ -31,7 +31,7 @@ Replace the current typewriter animation on the "zacsblog" nav logo with a syste
 ## Architecture
 
 ```
-nav.njk (data-animation="neural-resolve" data-accent-start="4")
+nav.njk (data-animation="network" data-accent-start="4")
     │
     ▼
 title-animation.js
@@ -41,7 +41,8 @@ title-animation.js
     └── variants = {
           "pull-up":           pullUpAnimate(letters),
           "neural-resolve":    neuralResolveAnimate(letters),
-          "gradient-descent":  gradientDescentAnimate(letters)
+          "gradient-descent":  gradientDescentAnimate(letters),
+          "network":           networkAnimate(letters, container)
         }
 ```
 
@@ -60,6 +61,7 @@ npm run dev
 # Open http://localhost:8080/?animation=pull-up
 # Open http://localhost:8080/?animation=neural-resolve
 # Open http://localhost:8080/?animation=gradient-descent
+# Open http://localhost:8080/?animation=network        ← production default
 # Compare side-by-side, pick favorite, set as data-animation in nav.njk
 ```
 
@@ -73,3 +75,6 @@ Each letter starts visible but displaying rapidly cycling random characters. Aft
 
 ### 3. Gradient Descent (`gradient-descent`)
 Each letter starts at a random offset position (scattered) with 0 opacity. Letters simultaneously move toward their correct position following a smooth curve with slight wobble, fading in as they converge — evoking optimization convergence.
+
+### 4. Network (`network`) — Production Default
+Letters start scattered (like gradient-descent) and converge to their final positions while thin SVG edges connect nearby letter pairs — a living constellation graph that collapses into the title text. Edge opacity is distance-based and fades acceleratedly as letters settle. Matches the visual DNA of the hero physics banner.

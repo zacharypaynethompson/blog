@@ -959,6 +959,16 @@ main {
   transition: color 0.15s ease;
 }
 
+/* --- Variant: network --- */
+.title-letter.network-node-pulse {
+  animation: nodePulse 0.4s ease-out;
+}
+
+@keyframes nodePulse {
+  0%   { text-shadow: 0 0 8px var(--color-accent); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+
 /* --- Variant: gradient-descent --- */
 .title-letter.anim-gradient-descent {
   animation: gradientDescend 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;

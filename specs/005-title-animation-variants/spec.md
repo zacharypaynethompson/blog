@@ -2,7 +2,7 @@
 
 **Feature Branch**: `005-title-animation-variants`
 **Created**: 2026-03-26
-**Status**: Draft
+**Status**: Implemented
 **Input**: User description: "Rework the blog title animation with multiple unique variant options to preview and choose from, replacing the current typewriter effect with creative, AI/ML-inspired letter animations"
 
 ## User Scenarios & Testing *(mandatory)*
@@ -127,10 +127,11 @@ As a visitor who prefers reduced motion, I want the title to appear immediately 
 
 - The animation applies to the "zacsblog" navigation logo title specifically, not to blog post titles or page headings
 - The existing dual-color scheme ("zacs" in text color, "blog" in accent) is a firm brand requirement
-- The "pull from behind" and "AI/ML-inspired" concepts are the two anchoring ideas, with the third variant being a creative addition that complements the set
+- The "pull from behind" and "AI/ML-inspired" concepts were the two anchoring ideas; a fourth "network" variant combining gradient-descent convergence with constellation-style SVG edges was added during iteration and selected as the default
 - The preview mechanism is for the blog owner's development use only and does not need to be exposed to site visitors
 - Performance impact of animations should be negligible — no heavy canvas rendering or large asset downloads for title animation
-- The current typewriter animation will be fully replaced, not kept as an additional option
+- The current typewriter animation has been fully replaced
+- The "network" variant was chosen as the production default after side-by-side comparison
 
 ## Scope Boundaries
 
