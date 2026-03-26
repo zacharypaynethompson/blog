@@ -247,7 +247,7 @@ main {
 }
 
 /* Typewriter logo in navigation */
-.nav-logo.typewriter-title {
+.nav-logo {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 1.25rem;
   font-weight: 700;
@@ -920,52 +920,63 @@ main {
 }
 
 /* ==========================================================================
-   Typewriter Animation (T040)
+   Title Animation System (replaces typewriter)
    ========================================================================== */
 
-/* typewriter.css — variable-speed typewriter title animation */
-
-.typewriter-title {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 400;
-  line-height: 1.4;
-  min-height: 1.4em;
-  color: inherit;
-}
-
-.typewriter-title .tw-cursor {
+/* Shared letter styles */
+.title-letter {
   display: inline-block;
-  width: 2px;
-  height: 1.1em;
-  background: currentColor;
-  vertical-align: text-bottom;
-  margin-left: 1px;
-  animation: tw-blink 0.5s step-end infinite;
+  position: relative;
 }
 
-.typewriter-title .tw-cursor--hidden {
-  animation: none;
-  opacity: 0;
-}
-
-@keyframes tw-blink {
-  50% { opacity: 0; }
-}
-
-/* Hide cursor after typing completes */
-.typewriter-title .tw-cursor--done {
-  animation: none;
-  display: none;
-}
-
-/* Character coloring for typewriter text */
-.typewriter-title .tw-char-normal {
+.title-char-normal {
   color: var(--color-text);
 }
 
-.typewriter-title .tw-char-accent {
+.title-char-accent {
   color: var(--color-accent);
+}
+
+/* --- Variant: pull-up --- */
+.title-letter-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.title-letter.anim-pull-up {
+  animation: pullUp 0.5s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
+}
+
+@keyframes pullUp {
+  from { transform: translateY(110%); opacity: 0; }
+  60%  { opacity: 1; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Variant: neural-resolve --- */
+.title-letter.resolved {
+  transition: color 0.15s ease;
+}
+
+/* --- Variant: gradient-descent --- */
+.title-letter.anim-gradient-descent {
+  animation: gradientDescend 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes gradientDescend {
+  0%   { transform: translate(var(--start-x), var(--start-y)); opacity: 0; }
+  30%  { opacity: 0.7; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+
+/* Reduced motion: skip all title animations */
+@media (prefers-reduced-motion: reduce) {
+  .title-letter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* ==========================================================================
