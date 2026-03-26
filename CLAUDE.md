@@ -47,7 +47,9 @@ Feature specifications live in `specs/` with numbered prefixes:
 - **004-hero-physics-simulation**: Canvas-based constellation hero banner with cursor physics
 
 ## Recent Changes
+- 005-title-animation-variants: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None (vanilla JS, CSS animations/transforms — no new dependencies)
 - Dark mode toggle with deployment fix for GitHub Pages
 - Hero physics constellation banner on homepage
-- Network graph improvements (content search, explore filters)
-- Blog post: "Specification-Driven Development and the Case for Analysis"
+
+## Active Technologies
+- JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None (vanilla JS, CSS animations/transforms — no new dependencies) (005-title-animation-variants)

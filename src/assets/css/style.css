@@ -937,49 +937,6 @@ main {
   color: var(--color-accent);
 }
 
-/* --- Variant: pull-up --- */
-.title-letter-wrap {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-}
-
-.title-letter.anim-pull-up {
-  animation: pullUp 0.5s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes pullUp {
-  from { transform: translateY(110%); opacity: 0; }
-  60%  { opacity: 1; }
-  to   { transform: translateY(0); opacity: 1; }
-}
-
-/* --- Variant: neural-resolve --- */
-.title-letter.resolved {
-  transition: color 0.15s ease;
-}
-
-/* --- Variant: network --- */
-.title-letter.network-node-pulse {
-  animation: nodePulse 0.4s ease-out;
-}
-
-@keyframes nodePulse {
-  0%   { text-shadow: 0 0 8px var(--color-accent); }
-  100% { text-shadow: 0 0 0 transparent; }
-}
-
-/* --- Variant: gradient-descent --- */
-.title-letter.anim-gradient-descent {
-  animation: gradientDescend 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-@keyframes gradientDescend {
-  0%   { transform: translate(var(--start-x), var(--start-y)); opacity: 0; }
-  30%  { opacity: 0.7; }
-  100% { transform: translate(0, 0); opacity: 1; }
-}
-
 /* Reduced motion: skip all title animations */
 @media (prefers-reduced-motion: reduce) {
   .title-letter {
