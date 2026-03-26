@@ -122,6 +122,41 @@
     });
   }
 
+  function wrapLabel(textEl, text, maxWidth) {
+    textEl.text(null);
+    const words = text.split(/\s+/);
+    let line = [];
+    let lineNumber = 0;
+    const lineHeight = 1.2; // em
+
+    // Create a temporary tspan to measure text
+    let tspan = textEl.append('tspan')
+      .attr('x', 0)
+      .attr('dy', 0)
+      .attr('text-anchor', 'middle');
+
+    words.forEach(word => {
+      line.push(word);
+      tspan.text(line.join(' '));
+      if (tspan.node().getComputedTextLength() > maxWidth && line.length > 1) {
+        line.pop();
+        tspan.text(line.join(' '));
+        line = [word];
+        lineNumber++;
+        tspan = textEl.append('tspan')
+          .attr('x', 0)
+          .attr('dy', lineHeight + 'em')
+          .attr('text-anchor', 'middle')
+          .text(word);
+      }
+    });
+
+    // Center the block vertically by shifting the first tspan up
+    const totalLines = lineNumber + 1;
+    const offset = -(totalLines - 1) * lineHeight / 2;
+    textEl.select('tspan:first-child').attr('dy', offset + 'em');
+  }
+
   function createVisualization() {
     simulation = d3.forceSimulation(nodes)
       .force('link', d3.forceLink(links)
@@ -175,8 +210,16 @@
       .join('text')
       .attr('class', d => `graph-label ${d.type}`)
       .attr('data-id', d => d.id)
-      .text(d => d.type === 'tag' ? (d.name || d.id) : (d.title || d.id))
-      .attr('dy', d => d.type === 'tag' ? 4 : 0);
+      .attr('dy', d => d.type === 'tag' ? 4 : 0)
+      .each(function(d) {
+        const el = d3.select(this);
+        const label = d.type === 'tag' ? (d.name || d.id) : (d.title || d.id);
+        if (d.type === 'post') {
+          wrapLabel(el, label, width * 0.4);
+        } else {
+          el.text(label);
+        }
+      });
 
     // Direct tick updates - no rAF throttle for responsive dragging
     simulation.on('tick', updatePositions);
@@ -199,6 +242,11 @@
     labelElements
       .attr('x', d => d.x)
       .attr('y', d => d.y + (d.type === 'post' ? -15 : 20));
+
+    // Update tspan x positions to match parent text element
+    labelElements.each(function(d) {
+      d3.select(this).selectAll('tspan').attr('x', d.x);
+    });
 
     // Auto-fit viewport to contain all nodes (only while simulation is settling, not during user interaction)
     if (!userHasZoomed && !selectedNode && simulation && simulation.alpha() > config.animation.alphaMin) {
