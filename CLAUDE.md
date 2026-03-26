@@ -1,33 +1,53 @@
 # blog Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-03-13
+Personal blog built with Eleventy 2.x (static site generator). Last updated: 2026-03-26
 
-## Active Technologies
-- Node.js 18+ LTS (Eleventy static site generator) + Eleventy 2.x, CSS Custom Properties, Google Fonts (002-rustic-styling)
-- Static files (markdown posts, generated HTML/CSS/JS) (002-rustic-styling)
-- JavaScript ES2020+ (browser), Node.js 18+ (Eleventy build process) + D3.js (force simulation, SVG rendering), Eleventy 2.x (existing static site generator) (003-obsidian-network-graph)
-- Static Markdown files with YAML frontmatter (existing blog posts) (003-obsidian-network-graph)
-- JavaScript ES2020+ (browser), Node.js 18+ (Eleventy build) + None — browser-native Canvas 2D API, requestAnimationFrame, IntersectionObserver (004-hero-physics-simulation)
-
-- JavaScript (Node.js 18+ LTS) + Eleventy 2.x (static site generator), d3.js 7.x (visualization) (001-static-blog-site)
+## Tech Stack
+- **Build**: Node.js 18+ LTS, Eleventy 2.x (`@11ty/eleventy`)
+- **Frontend**: JavaScript ES2020+ (browser), CSS Custom Properties, Google Fonts
+- **Visualization**: D3.js 7.x (network graph), Canvas 2D API (hero physics banner)
+- **Content**: Markdown posts with YAML frontmatter
 
 ## Project Structure
 
 ```text
 src/
+  _data/           # Global data files (site.json)
+  _includes/       # Layouts (base, page, post) and partials (nav, footer, etc.)
+  assets/
+    css/           # style.css (main), network-graph.css (graph-specific)
+    js/            # network-graph.js, hero-physics.js, explore.js, content-search.js, etc.
+  data/            # Eleventy data templates (graph JSON, search index)
+  pages/           # Static pages (about.md)
+  posts/           # Blog posts (markdown with frontmatter)
+  explore.njk      # Explore page with network graph + post list
+  index.njk        # Homepage with hero banner
+  tags.njk         # Tags listing page
+specs/             # Feature specifications (001-004)
 ```
 
 ## Commands
 
-npm test && npm run lint
+- `npm run dev` — Start dev server with live reload
+- `npm run build` — Build static site to `_site/`
+- `npm test` — Run tests (vitest)
+- `npm run lint` — Lint templates (html-validate)
+- `npm test && npm run lint` — Full check
 
 ## Code Style
 
-JavaScript (Node.js 18+ LTS): Follow standard conventions
+JavaScript: ES2020+ standard conventions. CSS: BEM-like class naming with CSS Custom Properties for theming.
+
+## Feature Specs
+
+Feature specifications live in `specs/` with numbered prefixes:
+- **001-static-blog-site**: Core Eleventy blog setup, layouts, post system
+- **002-rustic-styling**: Visual styling — CSS custom properties, Google Fonts, animations
+- **003-obsidian-network-graph**: Interactive D3.js force-directed graph on explore page
+- **004-hero-physics-simulation**: Canvas-based constellation hero banner with cursor physics
 
 ## Recent Changes
-- 004-hero-physics-simulation: Added JavaScript ES2020+ (browser), Node.js 18+ (Eleventy build) + None — browser-native Canvas 2D API, requestAnimationFrame, IntersectionObserver
-- 003-obsidian-network-graph: Added JavaScript ES2020+ (browser), Node.js 18+ (Eleventy build process) + D3.js (force simulation, SVG rendering), Eleventy 2.x (existing static site generator)
-
-- 002-rustic-styling: Added Node.js 18+ LTS (Eleventy static site generator) + Eleventy 2.x, CSS Custom Properties, Google Fonts
-
+- Dark mode toggle with deployment fix for GitHub Pages
+- Hero physics constellation banner on homepage
+- Network graph improvements (content search, explore filters)
+- Blog post: "Specification-Driven Development and the Case for Analysis"
