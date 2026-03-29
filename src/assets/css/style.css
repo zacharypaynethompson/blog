@@ -1021,3 +1021,25 @@ main {
     background-size: 100% 100%;
   }
 }
+
+/* ==========================================================================
+   Comments Section
+   ========================================================================== */
+
+.comments-section {
+  max-width: var(--max-width);
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-sm);
+}
+
+.comments-heading {
+  font-size: calc(var(--font-size-base) * var(--type-scale));
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-xs);
+}
+
+.giscus-container {
+  min-height: 150px;
+}
