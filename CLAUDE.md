@@ -47,9 +47,10 @@ Feature specifications live in `specs/` with numbered prefixes:
 - **004-hero-physics-simulation**: Canvas-based constellation hero banner with cursor physics
 
 ## Recent Changes
+- 006-blog-comments: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + Giscus widget (`https://giscus.app/client.js`, loaded via script tag — no npm package)
+- 006-blog-comments: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None new for frontend (vanilla JS, CSS); one BaaS provider for comment storage
 - 005-title-animation-variants: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None (vanilla JS, CSS animations/transforms — no new dependencies)
-- Dark mode toggle with deployment fix for GitHub Pages
-- Hero physics constellation banner on homepage
 
 ## Active Technologies
-- JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None (vanilla JS, CSS animations/transforms — no new dependencies) (005-title-animation-variants)
+- JavaScript ES2020+ (browser), CSS3, Nunjucks templates + Giscus widget (`https://giscus.app/client.js`, loaded via script tag — no npm package) (006-blog-comments)
+- GitHub Discussions (managed by GitHub; no custom database) (006-blog-comments)

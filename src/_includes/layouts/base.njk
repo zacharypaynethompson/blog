@@ -57,11 +57,23 @@
         if (icon) icon.textContent = isDark() ? '\u263C' : '\u263E';
       }
       updateIcon();
+      function updateGiscusTheme(theme) {
+        var iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        var pathPrefix = document.body.getAttribute('data-path-prefix') || '/';
+        var themeUrl = isLocal ? theme : window.location.origin + pathPrefix + 'assets/css/giscus-' + theme + '.css';
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: themeUrl } } },
+          'https://giscus.app'
+        );
+      }
       toggle.addEventListener('click', function () {
         var next = isDark() ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         updateIcon();
+        updateGiscusTheme(next);
       });
     })();
   </script>
