@@ -35,8 +35,11 @@ Before drafting, ask the user **3-5 focused questions**. Pick from these based o
 - **Interactive elements**: "Would an interactive code example or embedded visualization add something?"
 - **Structure**: "Do you see this as a linear argument, a listicle, a narrative, or something else?"
 - **Missing pieces**: "You mentioned X but didn't expand on it — should that be in the post or was it tangential?"
+- **Factual context**: "You reference X tool/framework — have you actually used it, or is this based on reading about it?" (This affects framing: first-hand experience vs. describing something you haven't tried yet.)
+- **Naming**: "You mention conversations with specific people — should they be named or kept anonymous?"
+- **Technical depth**: "For the technical sections, how deep should I go — conceptual framing only, or implementation details too?"
 
-Do NOT ask all of these. Only ask what's genuinely unclear from the input. If the input is detailed enough, you might only need 1-2 questions.
+Do NOT ask all of these. Only ask what's genuinely unclear from the input. If the input is detailed enough, you might only need 1-2 questions. Err toward asking more questions rather than fewer — it's better to check assumptions than to guess wrong.
 
 **Wait for the user's answers before proceeding.**
 
@@ -78,10 +81,12 @@ layout: layouts/post.njk
 The draft must sound like the user wrote it. Follow these principles strictly:
 
 ### 1. Direct and economical
-Cut anything that exists only for rhetorical effect. Every sentence should do work.
+Cut anything that exists only for rhetorical effect. Every sentence should do work. Remove parentheticals and asides when the context already makes the point.
 
 - No: "Not in some abstract sense — but practically, in a way I can hand to an LLM and say: this is how I write, stick to it."
 - Yes: "What I want to do here is figure out what my writing actually sounds like in a way I can hand to an LLM and say 'this is how I write'"
+- No: "Rather than using an LLM to classify text into a flat list of categories (as GABRIEL does), it classifies documents..."
+- Yes: "Rather than using an LLM to classify text into a flat list of categories, it classifies documents..."
 
 ### 2. Precise over evocative
 Say what you mean rather than gesture at it. Name the thing specifically rather than using vague nouns.
@@ -116,10 +121,16 @@ Show the process, don't commentate on it. Never describe what the writing is doi
 - Yes: (Removed entirely. Let the writing speak for itself.)
 
 ### 6. Functional punctuation over stylistic punctuation
-Use commas and parentheses for clarity. Avoid em dashes for dramatic effect.
+Use commas, "that", or "e.g.," for clarity. Avoid em dashes and colons for dramatic or structural effect.
 
 - No: "the blog voice — the one I'd use if I were writing a position on something"
 - Yes: "the blog voice, e.g., the one I'd use if I were writing a position on something"
+- No: "You're asking: 'how does our economy fit into these predefined categories?'"
+- Yes: "You're asking 'how does our economy fit into these predefined categories?', the categories came first"
+- No: "The logic is: if your taxonomy is detailed enough"
+- Yes: "The logic is that if your taxonomy is detailed enough"
+- No: "classify its attributes: what technology it uses"
+- Yes: "classify its attributes e.g., what technology it uses"
 
 ### 7. Conversational but not performatively so
 Don't manufacture energy or dramatic buildup. Transitions should flow naturally.
@@ -157,8 +168,21 @@ When making a tangential point, break it into its own paragraph and mark it expl
 - No: (Stata analogy critique buried mid-paragraph after the main point about methodology)
 - Yes: "As an aside, the paper compares GABRIEL to Stata..." (own paragraph, clearly marked as a digression)
 
+### 12. Anonymise people by default
+Don't name individuals in blog posts unless there's a specific reason. Default to "a colleague" or similar.
+
+- No: "This distinction came into focus for me through a conversation with David Ampudia de Haro at the Innovation Growth Lab, where he made a point that I think is underappreciated."
+- Yes: "This distinction came into focus for me through a conversation with a colleague at the Innovation Growth Lab."
+
+### 13. Cut non-load-bearing technical detail
+If a technical detail doesn't serve the argument, remove it. Keep the conceptual point, cut the implementation specs.
+
+- No: "It uses small sentence-transformer models (around 22 million parameters) rather than large language models, which makes it fast, cheap to run, and self-hostable. Classification is decomposable, meaning you can inspect which matcher contributed what score."
+- Yes: "It's designed so that classification is decomposable, meaning you can inspect which matcher contributed what score."
+
 ## Formatting notes
 
 - Titles are always lowercase
 - `layout: layouts/post.njk` is required on every post
 - Posts don't have to be long — let the content dictate the length
+- Use **bold** for key terms when introducing them in summary or list contexts
