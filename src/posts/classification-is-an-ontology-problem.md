@@ -10,7 +10,7 @@ description: Top-down classification forces an ontology onto your data. Sometime
 layout: layouts/post.njk
 ---
 
-In a [previous post](/posts/classification-is-a-logistics-problem/), I argued that the hard part of classification isn't methodology, it's data validity and definitional alignment. I still think that's true, but another dimension I didn't address is whether the entire framing of top-down classification is appropriate for what you're trying to understand.
+In a [previous post](/blog/posts/classification-is-a-logistics-problem/), I argued that the hard part of classification isn't methodology, it's data validity and definitional alignment. I still think that's true, but another dimension I didn't address is whether the entire framing of top-down classification is appropriate for what you're trying to understand.
 
 This is less about the practicalities of classification and more about the epistemology of it. When you define sectors from the top down and then classify entities into them, you're imposing an ontology onto your data. That's fine for some purposes, but for others it's fundamentally misaligned with what you're trying to learn.
 
