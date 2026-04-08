@@ -51,6 +51,10 @@ Feature specifications live in `specs/` with numbered prefixes:
 - 006-blog-comments: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None new for frontend (vanilla JS, CSS); one BaaS provider for comment storage
 - 005-title-animation-variants: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None (vanilla JS, CSS animations/transforms — no new dependencies)
 
+## Gotchas
+
+- **pathPrefix and URLs**: The site is deployed at `/blog/` on GitHub Pages. Relative links in markdown posts must include the `/blog/` prefix (e.g. `/blog/posts/my-post/`, not `/posts/my-post/`).
+
 ## Active Technologies
 - JavaScript ES2020+ (browser), CSS3, Nunjucks templates + Giscus widget (`https://giscus.app/client.js`, loaded via script tag — no npm package) (006-blog-comments)
 - GitHub Discussions (managed by GitHub; no custom database) (006-blog-comments)

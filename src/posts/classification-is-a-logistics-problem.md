@@ -83,4 +83,4 @@ I think the risk with tools like GABRIEL or The Data City isn't that their inacc
 
 I certainly don't think message is "don't use LLMs for classification." They're very good at it and you should. The message is that methodology is the least binding constraint, and tools that make methodology effortless can make people forget that the hard work is often somewhere else.
 
-There's also a deeper question about whether this entire top-down approach to classification is the right framing in the first place, which I explore in a [follow-up post on classification as an ontology problem](/posts/classification-is-an-ontology-problem/).
+There's also a deeper question about whether this entire top-down approach to classification is the right framing in the first place, which I explore in a [follow-up post on classification as an ontology problem](/blog/posts/classification-is-an-ontology-problem/).
