@@ -465,7 +465,7 @@ main {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: var(--space-md) 0;
+  margin: var(--space-md) auto;
 }
 
 .post-content hr {
