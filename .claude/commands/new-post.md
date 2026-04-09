@@ -81,12 +81,16 @@ layout: layouts/post.njk
 The draft must sound like the user wrote it. Follow these principles strictly:
 
 ### 1. Direct and economical
-Cut anything that exists only for rhetorical effect. Every sentence should do work. Remove parentheticals and asides when the context already makes the point.
+Cut anything that exists only for rhetorical effect. Every sentence should do work. Remove parentheticals that restate or elaborate what the context already makes clear, but keep short parenthetical asides that add humor, personality, or genuine qualification.
 
 - No: "Not in some abstract sense — but practically, in a way I can hand to an LLM and say: this is how I write, stick to it."
 - Yes: "What I want to do here is figure out what my writing actually sounds like in a way I can hand to an LLM and say 'this is how I write'"
 - No: "Rather than using an LLM to classify text into a flat list of categories (as GABRIEL does), it classifies documents..."
 - Yes: "Rather than using an LLM to classify text into a flat list of categories, it classifies documents..."
+- No: "being honest about what the current technology actually has access to"
+- Yes: "recognising what the current technology actually has access to" (single word over phrase)
+- OK: "that produce something edible (most of the time)" (short aside that adds personality)
+- OK: "learning through repetition what works (and being aggressively scolded if not)" (short aside that adds context/humor)
 
 ### 2. Precise over evocative
 Say what you mean rather than gesture at it. Name the thing specifically rather than using vague nouns.
@@ -104,8 +108,8 @@ Respect logical scaffolding but keep surfaces clean. Combine short related sente
 - No: "The knowledge base is a single repo. Obsidian Git syncs it automatically every few minutes."
 - Yes: "The knowledge base is a single repo and Obsidian Git syncs it automatically every few minutes."
 
-### 4. Comfortable with tentativeness when genuine
-Don't assert false confidence. If something is exploratory, say so. Use "probably", "I think", "my core thoughts" rather than definitive framing.
+### 4. Comfortable with tentativeness when genuine, but don't reflexively hedge
+Don't assert false confidence. If something is exploratory, say so. Use "probably", "I think", "my core thoughts" rather than definitive framing. But don't hedge everything — when you have actual conviction, state it directly. Drop "I think" where the uncertainty isn't genuine.
 
 - No: "The process works like this:"
 - Yes: "I think the process needs to work something like this:"
@@ -113,6 +117,8 @@ Don't assert false confidence. If something is exploratory, say so. Use "probabl
 - Yes: "it probably won't get captured"
 - No: "The core bet here is that"
 - Yes: "My core thoughts here is that"
+- No: "in a way that I think is underappreciated" (reflexive hedge on a point you're confident about)
+- Yes: "in a way that is underappreciated"
 
 ### 5. Allergic to being narrated
 Show the process, don't commentate on it. Never describe what the writing is doing as it does it.
@@ -149,12 +155,14 @@ When listing related points, use comma-separated clauses or "e.g.," rather than 
 - Yes: "For example: job adverts are proxies for job activity, company descriptions are proxies for what a firm actually does, patents are proxies for innovation."
 
 ### 9. Generic over branded
-Use generic terms where a brand name isn't necessary.
+Use generic terms where a brand name or specific technology isn't necessary. This applies even to terms like "AI" when the broader category ("technology") is what you actually mean.
 
 - No: "It lives in meetings, in Slack threads, in conversations"
 - Yes: "It lives in meetings, message threads and conversations"
 - No: "Stata versions. GPT doesn't."
 - Yes: "Stata versions, proprietary LLMs don't." (generalise from specific product to category when the brand isn't the point)
+- No: "there's genuine potential for AI to help people cook better"
+- Yes: "there's genuine potential for technology to help people cook better" (generalise when the specific technology isn't the point)
 
 ### 10. Substantive over evaluative
 Explain what's wrong rather than labelling it with a pithy judgment. State the problem, not your verdict on it.
@@ -174,7 +182,19 @@ Don't name individuals in blog posts unless there's a specific reason. Default t
 - No: "This distinction came into focus for me through a conversation with David Ampudia de Haro at the Innovation Growth Lab, where he made a point that I think is underappreciated."
 - Yes: "This distinction came into focus for me through a conversation with a colleague at the Innovation Growth Lab."
 
-### 13. Cut non-load-bearing technical detail
+### 13. Plain headings over clever ones
+Section headings should be direct and readable, not showcases for jargon or clever framing. If a plain-language heading captures the point, prefer it over a technically impressive one.
+
+- No: "chefs as uninterpretable neural networks"
+- Yes: "chefs don't understand themselves"
+
+### 14. Scare quotes for metaphorical technical terms
+When borrowing a technical term for a non-technical context, use quotation marks to signal it's being used loosely or metaphorically rather than literally.
+
+- No: "massive amounts of his own experiential data"
+- Yes: "massive amounts of his own experiential \"data\""
+
+### 15. Cut non-load-bearing technical detail
 If a technical detail doesn't serve the argument, remove it. Keep the conceptual point, cut the implementation specs.
 
 - No: "It uses small sentence-transformer models (around 22 million parameters) rather than large language models, which makes it fast, cheap to run, and self-hostable. Classification is decomposable, meaning you can inspect which matcher contributed what score."

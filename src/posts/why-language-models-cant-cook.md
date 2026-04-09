@@ -9,21 +9,23 @@ description: The training data for food is broken at source. The best culinary k
 layout: layouts/post.njk
 ---
 
-Language models write decent poetry. Not great poetry, but if you ask one for a sonnet about loss, most people would read it and think "yeah, that's alright." This makes sense because the best poetry ever written is directly in the training data. Shakespeare, Dickinson, Neruda, the full text, available for the model to learn from. The ceiling of what exists in text is genuinely high.
+Language models write decent poetry. Not great poetry, but if you ask one for a sonnet about loss, most people would read it and think "yeah, that's alright." This makes sense because the best poetry ever written is directly in the training data. Shakespeare, Dickinson, Owen, the full text, available for the model to learn from. The ceiling of what exists in text is very high.
 
 Food is the opposite. The best culinary knowledge in the world was never written down. The recipes that produce the most memorable meals exist in the hands and intuitions of people who learned by doing, adjusting, tasting, and repeating over years. What LLMs actually train on is the written record of food, and I think that record is fundamentally broken.
 
 ## the training data is bad at source
 
-Most recipes online are terrible. Not wrong exactly, but shallow. They'll give you ingredient lists and step sequences that produce something edible, and that's about where it ends. The recipe SEO economy has optimised for long preambles and ad placements rather than for actually teaching anyone to cook. Celebrity chef cookbooks optimise for a different but equally unhelpful thing, which is selling the book itself and the associated cookware, restaurants, and brand extensions that come with it.
+Most recipes online are terrible. Not wrong exactly, but shallow. They'll give you ingredient lists and step sequences that produce something edible (most of the time), and that's about where it ends. The recipe SEO economy has optimised for long preambles and ad placements rather than for actually teaching anyone to cook. Celebrity chef cookbooks optimise for a different but equally unhelpful thing, which is selling the book itself and the associated cookware, restaurants, and brand extensions that come with it.
 
-The result is that the written record of food, the data that language models learn from, is dominated by instructions that are technically functional but don't encode any real understanding of what's happening or why. They're not principles-based. They describe a sequence of actions without explaining the mechanisms that make those actions work.
+The result is that the written record of food, the data that language models learn from, is dominated by instructions that are technically functional but don't encode any real understanding of what's happening or why. They're not principles-based. They describe a sequence of actions often without explaining the mechanisms that make those actions work.
 
 This matters because when an LLM generates a recipe, it's drawing on this same pool. The output will be approximately right in the way that most recipes are approximately right, which means it'll be mediocre in exactly the same ways.
 
-## chefs as uninterpretable neural networks
+## chefs don't understand themselves
 
-Gordon Ramsay is very good at cooking. This isn't in question. But I think he's good at cooking primarily because of massive amounts of his own experiential data, thousands of iterations of testing things, tasting the results, and learning through repetition what works. He's essentially a neural network trained on sensory feedback that the rest of us don't have access to.
+Gordon Ramsay is very good at cooking. This isn't in question. But I think he's good at cooking primarily because of massive amounts of his own experiential "data", thousands of iterations of testing things, tasting the results, and learning through repetition what works (and being agressively scolded if not). He's essentially a neural network trained on sensory feedback that the rest of us don't have access to.
+
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnBjbzg4bHBjeW8ybTYwNWdyazAwc3Y5cjdreWg2NTZkcHIxd3FiNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13g5qUUHSHpcZy/giphy.gif)
 
 The problem is that when he tries to explain what he's doing, he often can't articulate the actual mechanism. He'll say "I'm doing this to make it crispy," but the reason it's crispy is something else entirely, some interaction of temperature, fat, moisture, or starch that he's triggering without consciously understanding why. He's learned the right actions through experience but can't decompose them into principles. In machine learning terms, he's mechanistically uninterpretable.
 
@@ -39,7 +41,7 @@ Beyond the quality of recipes themselves, there's a deeper problem. The experien
 
 Think about what makes a meal memorable. It's almost never just the food. It's who you're eating with, where you are, what time of year it is, what you've been doing that day. A bowl of simple pasta after a long walk through a coastal town is a completely different experience from the same pasta at home on a Tuesday evening. No amount of recipe accuracy captures that.
 
-This extends to cultural food knowledge in a way that I think is underappreciated. Nobody has written in any real detail about why Mexican people love hot sauce on crisps, for example. To me that seems a bit much, but there's probably a deep cultural and historical understanding that frames that preference, an understanding you'd only arrive at by growing up in that context, talking to a lot of people, or doing genuinely immersive research. That data doesn't exist online. It's lived knowledge.
+This extends to cultural food knowledge in a way that is underappreciated. Nobody has written in any real detail about why, in Mexico City, people love hot sauce on crisps, for example. To me that seems a bit much, but there's probably a deep cultural and historical understanding that frames that preference, an understanding you'd only arrive at by growing up in that context, talking to a lot of people, or doing genuinely immersive research. That data doesn't exist online. It's lived knowledge.
 
 Restaurant recommendations have the same problem. The best places to eat are mostly not written about, and when they are, the writing rarely captures the actual experience. What makes a great meal out with family or friends is so dependent on mood, company, and circumstance that trying to algorithmically recommend it feels fundamentally misaligned with what you're actually trying to optimise for.
 
@@ -57,4 +59,4 @@ These approaches encode the kind of knowledge that LLMs could genuinely benefit 
 
 I think this is worth paying attention to because there's a growing assumption that LLMs can handle any domain where text exists. Food has a lot of text. It just happens that most of it is bad in ways that are hard to detect from the outside. The recipes are syntactically correct and semantically plausible, they just don't encode the knowledge that actually matters for cooking well.
 
-I love cooking, and I think there's genuine potential for AI to help people cook better, to facilitate understanding, preserve creativity, and make the process of preparing food more enjoyable and more connected to the people and cultures it comes from. But I think you have to start by being honest about what the current technology actually has access to, and what it doesn't. The gap between written food knowledge and actual food knowledge is probably larger than in any other domain I can think of, and pretending that gap doesn't exist is how you end up with tools that make cooking worse rather than better.
+I love cooking, and I think there's genuine potential for technology to help people cook better, to facilitate understanding, preserve creativity, and make the process of preparing food more enjoyable and more connected to the people and cultures it comes from. But I think you have to start by recognising what the current technology actually has access to, and what it doesn't. The gap between written food knowledge and actual food knowledge is probably larger than in any other domain I can think of, and not accounting for that gap is how you end up with tools that make cooking worse rather than better.
