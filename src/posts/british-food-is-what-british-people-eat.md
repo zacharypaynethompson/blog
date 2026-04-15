@@ -88,8 +88,6 @@ Authenticity, to some extent, *is* a hoax. We decide where the depth comes from.
 
 British food is what British people eat.
 
----
-
 [^1]: Andrew Potter, [*The Authenticity Hoax: How We Get Lost Finding Ourselves*](https://www.harpercollins.com/products/the-authenticity-hoax-andrew-potter) (2010), as cited in Pete Brown, *Pie Fidelity: In Defence of British Food* (2019).
 [^2]: [Euromonitor International](https://www.euromonitor.com/) ready meals market data; [Mintel](https://www.mintel.com/), *World Cuisines UK* report. The UK accounts for approximately one-third of the entire European ready meals market by value.
 [^3]: Eric Pickles proposed "curry colleges" at the 2012 Conservative Party Conference. See [BBC News coverage](https://www.bbc.co.uk/news/uk-politics-19864aborede) and [The Guardian](https://www.theguardian.com/politics/2012/oct/08/eric-pickles-curry-college). <!-- TODO: verify these URLs -->
