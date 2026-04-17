@@ -8,7 +8,7 @@ description: The weeknight rotation of borrowed, mutated dishes that British peo
 layout: layouts/post.njk
 ---
 
-My nan makes something she calls waffle berry pudding, which constitutes of pre-made toasting waffles, raspberries, chocolate and Birds custard, assembled into a baked pudding. It's incredibly sweet and everything in it comes from a supermarket. It's also one of the few meals I can say comes from a "family recipe".
+My nan makes something she calls waffle berry pudding, which consists of pre-made toasting waffles, raspberries, chocolate and Bird's custard, assembled into a baked pudding. It's incredibly sweet and everything in it comes from a supermarket. It's also one of the few meals I can say comes from a "family recipe".
 
 I've been reading a book by Pete Brown called "In Defence of British Food" and in it he highlights spaghetti bolognese as a British dish[^4], and it got me thinking about what British food actually is for ordinary people right now. Not the heritage canon of roasts and pies and puddings, not the restaurant tier, not what food media tells you that you should be cooking. The actual weeknight rotation that most households cycle through without really thinking about it.
 
@@ -52,7 +52,7 @@ This means that British supermarket-assembled food is as culturally deep as any 
 
 The other thing that gets missed is you can make these borrowed dishes well without pretending they're something they're not.
 
-"English-style" fajitas, for example. You don't *have* to use pre-made seasoning packets. You can just use freshly ground spices and it's actually very nice. It's not Mexican food, and that's fine because we don't have Mexican ingredients and it's not really what British people are after anyway. It's its own thing. A stir fry in a pan at home is a quute a bit different from what you'd get from a wok at proper heat, but it *can* be good on its own terms. Spag bol made with care and decent ingredients is a satisfying meal regardless of what they think in Bologna.
+"English-style" fajitas, for example. You don't *have* to use pre-made seasoning packets. You can just use freshly ground spices and it's actually very nice. It's not Mexican food, and that's fine because we don't have Mexican ingredients and it's not really what British people are after anyway. It's its own thing. A stir fry in a pan at home is quite a bit different from what you'd get from a wok at proper heat, but it *can* be good on its own terms. Spag bol made with care and decent ingredients is a satisfying meal regardless of what they think in Bologna.
 
 We don't choose what's available in the supermarkets and we don't always have the budget for an organic roast chicken or Natoora tomatoes. That's fine. Work with what's there, make it well, and we can stop apologising for it.
 
@@ -85,11 +85,11 @@ But people are already making it their own. Think about that spag bol recipe. Fo
 
 Some of the British weeknight rotation will persist. Spag bol almost certainly will because it's cheap, flexible, and satisfying. Some of it won't. What lasts will be what's genuinely good enough, and over time those dishes will accumulate the kind of history and variation that other cultures currently call "traditional."
 
-I'll probably make something *like* my nan's waffle berry pudding for my own family. Perhaps A bit less sweet, maybe a bit less mushy. Those small adjustments, repeated across generations, are the same mechanism that produces the dishes other cultures are proud of. It's just younger here.
+I'll probably make something *like* my nan's waffle berry pudding for my own family. Perhaps a bit less sweet, maybe a bit less mushy. Those small adjustments, repeated across generations, are the same mechanism that produces the dishes other cultures are proud of. It's just younger here.
 
 ## and that's fine
 
-Authenticity, to some extent, *is* a hoax. We decide where the depth comes from. It comes from the person who makes the food for you or who you make it for, not only from the dish's historical pedigree or the legitimacy of its ingredients. You can make those weeknight meals well, with care and decent ingredients, without needing a Dorest small holding or heritage tomatoes. And those constraints we're under, the poor food culture infrastructure, the supermarket-shaped repertoire, the absence of institutional support, none of that is our fault. We can make do with what we've got.
+Authenticity, to some extent, *is* a hoax. We decide where the depth comes from. It comes from the person who makes the food for you or who you make it for, not only from the dish's historical pedigree or the legitimacy of its ingredients. You can make those weeknight meals well, with care and decent ingredients, without needing a Dorset smallholding or heritage tomatoes. And those constraints we're under, the poor food culture infrastructure, the supermarket-shaped repertoire, the absence of institutional support, none of that is our fault. We can make do with what we've got.
 
 British food is what British people eat.
 
