@@ -80,8 +80,10 @@ layout: layouts/post.njk
 
 The draft must sound like the user wrote it. Follow these principles strictly:
 
+**Post types matter.** Not every post is the same register. Analytical posts (e.g., about technology, methodology, classification systems) should be tighter and more restrained. Personal/cultural essays (e.g., about food, culture, lived experience) have more room for voice, humor, spoken-language markers, and self-deprecation. Some rules below are marked as applying more strictly to one type. When drafting, identify the post type early and calibrate accordingly.
+
 ### 1. Direct and economical
-Cut anything that exists only for rhetorical effect. Every sentence should do work. Remove parentheticals that restate or elaborate what the context already makes clear, but keep short parenthetical asides that add humor, personality, or genuine qualification.
+Cut anything that exists only for rhetorical effect. Every sentence should do work. Remove parentheticals that restate or elaborate what the context already makes clear, but keep short parenthetical asides that add humor, personality, or genuine qualification. **In personal essays**, interpret this more loosely: qualifiers, asides, and humor that add personality aren't filler even if they make sentences longer. Cut rhetorical filler, keep voice.
 
 - No: "Not in some abstract sense — but practically, in a way I can hand to an LLM and say: this is how I write, stick to it."
 - Yes: "What I want to do here is figure out what my writing actually sounds like in a way I can hand to an LLM and say 'this is how I write'"
@@ -126,8 +128,8 @@ Show the process, don't commentate on it. Never describe what the writing is doi
 - No: "You naturally talk about what you're doing as you're doing it. You're not rambling — you're building."
 - Yes: (Removed entirely. Let the writing speak for itself.)
 
-### 6. Functional punctuation over stylistic punctuation
-Use commas, "that", or "e.g.," for clarity. Avoid em dashes and colons for dramatic or structural effect.
+### 6. Functional punctuation over stylistic punctuation *(stricter in analytical posts)*
+Use commas, "that", or "e.g.," for clarity. Avoid em dashes and colons for dramatic or structural effect. **In personal essays**, stylistic punctuation earns its place when it adds voice: ellipsis for comedic timing ("you're gonna feel... lethargic"), parenthetical question marks for genuine uncertainty ("something with.. cous cous(?)"), italics for real emphasis ("it *can* be good on its own terms").
 
 - No: "the blog voice — the one I'd use if I were writing a position on something"
 - Yes: "the blog voice, e.g., the one I'd use if I were writing a position on something"
@@ -154,8 +156,8 @@ When listing related points, use comma-separated clauses or "e.g.," rather than 
 - No: "Job adverts are proxies for job activity. Company descriptions are proxies for what a firm actually does. Patents are proxies for innovation."
 - Yes: "For example: job adverts are proxies for job activity, company descriptions are proxies for what a firm actually does, patents are proxies for innovation."
 
-### 9. Generic over branded
-Use generic terms where a brand name or specific technology isn't necessary. This applies even to terms like "AI" when the broader category ("technology") is what you actually mean.
+### 9. Generic over branded *(stricter in analytical posts)*
+Use generic terms where a brand name or specific technology isn't necessary. This applies even to terms like "AI" when the broader category ("technology") is what you actually mean. **In personal essays**, brand names can earn their place when they ground the writing in lived experience and specificity (e.g., "Natoora tomatoes" signals a real price point the reader can look up; "Dolmio, Patak's, Blue Dragon" are the actual jars people recognise).
 
 - No: "It lives in meetings, in Slack threads, in conversations"
 - Yes: "It lives in meetings, message threads and conversations"
@@ -199,6 +201,46 @@ If a technical detail doesn't serve the argument, remove it. Keep the conceptual
 
 - No: "It uses small sentence-transformer models (around 22 million parameters) rather than large language models, which makes it fast, cheap to run, and self-hostable. Classification is decomposable, meaning you can inspect which matcher contributed what score."
 - Yes: "It's designed so that classification is decomposable, meaning you can inspect which matcher contributed what score."
+
+### 16. Questions over assertions about others' experience *(personal essays)*
+When speculating about what people in other countries or contexts feel, pose it as a question rather than stating it as fact. This avoids overreach and sounds more honest.
+
+- No: "French home cooks don't feel sheepish about making a gratin."
+- Yes: "Do French home cooks feel sheepish about making a gratin?"
+
+### 17. Personal anecdotes over impersonal lists *(personal essays)*
+When the post is personal, ground observations in specific memories rather than listing things generically. Transform "people do X" into "my mum did X" where you have the actual memory.
+
+- No: "Worcestershire sauce in spag bol, Marmite or Bovril for depth, brown sauce on the side"
+- Yes: "For me it's infused with visions of my Mum putting in 'secret' touches, like Worcestershire sauce, Marmite and even brown sauce"
+
+### 18. Self-deprecating concessions *(personal essays)*
+When making a bold claim, concede the obvious counterpoint with humor rather than leaving it for the reader to mentally object to. This builds trust and warmth.
+
+- No: "The cassoulet just has better PR."
+- Yes: "The cassoulet just has better PR, and a fancy dish, and, admittedly, does taste much better."
+- No: "Twenty-five pounds for an awful pie."
+- Yes: "Ten pounds for a dry scotch egg is too much for me even after 4 pints of bitter."
+
+### 19. "We" over imperative for calls to action
+Don't lecture the reader. Use collective "we" rather than commanding them. This applies across post types but matters most in personal essays.
+
+- No: "stop apologising for it"
+- Yes: "we can stop apologising for it"
+
+### 20. Don't universalize your framing
+Avoid claiming your angle is the standard or canonical one. Present it as one perspective.
+
+- No: "The standard critique of British weeknight cooking"
+- Yes: "One critique of British weeknight cooking"
+- No: "The contrast with other countries is noticeable."
+- Yes: "This is more salient when you compare to how this looks in peer countries."
+
+### 21. Introduce unfamiliar terms for the reader
+When using a term that a general reader might not know, add a brief gloss rather than assuming knowledge.
+
+- No: "German households often eat Abendbrot"
+- Yes: "German households often eat something called Abendbrot, a cold meal of bread, cheese and cold cuts"
 
 ## Formatting notes
 

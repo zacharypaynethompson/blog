@@ -1,4 +1,13 @@
 module.exports = function(eleventyConfig) {
+  // Configure markdown-it with footnotes plugin
+  const markdownIt = require("markdown-it");
+  const markdownItFootnote = require("markdown-it-footnote");
+
+  const md = markdownIt({ html: true, linkify: true });
+  md.use(markdownItFootnote);
+
+  eleventyConfig.setLibrary("md", md);
+
   // Passthrough copy for static assets
   eleventyConfig.addPassthroughCopy("src/assets");
 
