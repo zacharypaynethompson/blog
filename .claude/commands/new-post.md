@@ -91,6 +91,7 @@ Cut anything that exists only for rhetorical effect. Every sentence should do wo
 - Yes: "Rather than using an LLM to classify text into a flat list of categories, it classifies documents..."
 - No: "being honest about what the current technology actually has access to"
 - Yes: "recognising what the current technology actually has access to" (single word over phrase)
+- No: "genuinely great" → "great"; "a whole replacement system" → "a replacement system"; "basically the founding document" → "effectively the founding document" (cut intensifiers that don't earn their place)
 - OK: "that produce something edible (most of the time)" (short aside that adds personality)
 - OK: "learning through repetition what works (and being aggressively scolded if not)" (short aside that adds context/humor)
 
@@ -123,10 +124,13 @@ Don't assert false confidence. If something is exploratory, say so. Use "probabl
 - Yes: "in a way that is underappreciated"
 
 ### 5. Allergic to being narrated
-Show the process, don't commentate on it. Never describe what the writing is doing as it does it.
+Show the process, don't commentate on it. Never describe what the writing is doing as it does it. This includes summary paragraphs that restate what was just argued and narrating having a thought rather than just stating it.
 
 - No: "You naturally talk about what you're doing as you're doing it. You're not rambling — you're building."
 - Yes: (Removed entirely. Let the writing speak for itself.)
+- No: "It occurs to me that the egg isn't bland at all."
+- Yes: "This egg isn't bland at all." (state the thought, don't narrate having it)
+- No: "Everything pointed the same direction. The food got heavy, portable and fast. The spices were already gone." (summary paragraph restating what was just argued — cut it)
 
 ### 6. Functional punctuation over stylistic punctuation *(stricter in analytical posts)*
 Use commas, "that", or "e.g.," for clarity. Avoid em dashes and colons for dramatic or structural effect. **In personal essays**, stylistic punctuation earns its place when it adds voice: ellipsis for comedic timing ("you're gonna feel... lethargic"), parenthetical question marks for genuine uncertainty ("something with.. cous cous(?)"), italics for real emphasis ("it *can* be good on its own terms").
@@ -151,6 +155,7 @@ When listing related points, use comma-separated clauses or "e.g.," rather than 
 
 - No: "User requirements surface. Edge cases get raised. Someone explains the business constraint."
 - Yes: "E.g., User requirements naturally surface, edge cases get raised, someone explains the business constraint."
+- No: "no cutlery, no plate, no lingering" (three-beat rhetorical flourish that reads as performative)
 - No: "The basic idea is simple: dump everything into one place"
 - Yes: "The basic idea is you dump everything into one place"
 - No: "Job adverts are proxies for job activity. Company descriptions are proxies for what a firm actually does. Patents are proxies for innovation."
@@ -241,6 +246,29 @@ When using a term that a general reader might not know, add a brief gloss rather
 
 - No: "German households often eat Abendbrot"
 - Yes: "German households often eat something called Abendbrot, a cold meal of bread, cheese and cold cuts"
+
+### 22. Comedy through deadpan understatement, not annotation *(personal essays)*
+Humor works by treating absurd things as normal, not by flagging that something is funny. The comedic register is balanced irreverence: silly but grounded, taking the piss but not sneering. Deliver the absurd detail straight-faced and let the reader do the work.
+
+- No: "It's funny because it's obviously taking the piss" (telling the reader it's funny)
+- Yes: "not indulging in superficial things like lunch" (calling lunch superficial is absurd, delivered straight-faced)
+- No: "the Italians were perfecting the art of staring at things" (over-extending the joke into a sneer)
+- Yes: "He stirs, and he tastes, and he waits." (the comedy is in the cliché accent and the deadpan detail)
+
+### 23. Don't over-sell jokes or punchlines *(personal essays)*
+If the humor is already landing in context, don't add another line to make sure the reader gets it. Trust the joke. One good line beats two attempts at the same laugh. Cut any sentence that exists only to top a joke that already works.
+
+- No: "Britain colonised half the world in part because it wanted its food to taste good." (at the end of a section that already makes this point through the facts)
+- No: "Probably the most cited book that nobody at the table has read." (topping a joke that's already landed)
+- No: "even if it's less fun to say at the pub" (tagging a callback onto an ending that already works)
+
+### 24. Don't pre-announce the insight
+Don't tell the reader what they're about to learn or what's interesting about it. Just state it. The reader will notice if it's surprising.
+
+- No: "This is the part most people don't know. Medieval English cooking was full of spice."
+- Yes: "Medieval English cooking was, actually, full of spice."
+- No: "And maybe that's the more interesting thing about British food at its best."
+- Yes: (removed — just state the thing directly)
 
 ## Formatting notes
 
