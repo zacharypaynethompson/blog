@@ -1,7 +1,8 @@
-module.exports = function(eleventyConfig) {
-  // Configure markdown-it with footnotes plugin
-  const markdownIt = require("markdown-it");
-  const markdownItFootnote = require("markdown-it-footnote");
+import markdownIt from "markdown-it";
+import markdownItFootnote from "markdown-it-footnote";
+import fs from "fs";
+
+export default function(eleventyConfig) {
 
   const md = markdownIt({ html: true, linkify: true });
   md.use(markdownItFootnote);
@@ -155,7 +156,6 @@ module.exports = function(eleventyConfig) {
 
   // Search index for full-text content search
   eleventyConfig.addCollection("searchIndex", function(collectionApi) {
-    const fs = require('fs');
     const posts = collectionApi.getFilteredByGlob("src/posts/*.md");
     return posts.map(post => {
       // Read raw markdown and strip frontmatter
