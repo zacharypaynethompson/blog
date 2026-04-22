@@ -92,6 +92,10 @@ Cut anything that exists only for rhetorical effect. Every sentence should do wo
 - No: "being honest about what the current technology actually has access to"
 - Yes: "recognising what the current technology actually has access to" (single word over phrase)
 - No: "genuinely great" → "great"; "a whole replacement system" → "a replacement system"; "basically the founding document" → "effectively the founding document" (cut intensifiers that don't earn their place)
+- No: "removing the natural speed governors that previously forced developers" (metaphorical phrase where one word will do)
+- Yes: "removing frictions that previously forced developers"
+- No: "The useful shift hasn't been the ceremony. It's been making the distinction" (negation setup before the positive — just state the positive)
+- Yes: "The useful shift has been making the distinction"
 - OK: "that produce something edible (most of the time)" (short aside that adds personality)
 - OK: "learning through repetition what works (and being aggressively scolded if not)" (short aside that adds context/humor)
 
@@ -112,7 +116,7 @@ Respect logical scaffolding but keep surfaces clean. Combine short related sente
 - Yes: "The knowledge base is a single repo and Obsidian Git syncs it automatically every few minutes."
 
 ### 4. Comfortable with tentativeness when genuine, but don't reflexively hedge
-Don't assert false confidence. If something is exploratory, say so. Use "probably", "I think", "my core thoughts" rather than definitive framing. But don't hedge everything — when you have actual conviction, state it directly. Drop "I think" where the uncertainty isn't genuine.
+Don't assert false confidence. If something is exploratory, say so. Use "probably", "I think", "my core thoughts" rather than definitive framing. But don't hedge everything — when you have actual conviction, state it directly. Drop "I think" where the uncertainty isn't genuine. Use emphatic auxiliaries ("do", "does") to actively strengthen genuine positions rather than just removing hedges.
 
 - No: "The process works like this:"
 - Yes: "I think the process needs to work something like this:"
@@ -120,8 +124,14 @@ Don't assert false confidence. If something is exploratory, say so. Use "probabl
 - Yes: "it probably won't get captured"
 - No: "The core bet here is that"
 - Yes: "My core thoughts here is that"
+- No: "I think it splits along two different lines" (hedge on a structural observation that isn't genuinely uncertain)
+- Yes: "this splits along two different lines"
 - No: "in a way that I think is underappreciated" (reflexive hedge on a point you're confident about)
 - Yes: "in a way that is underappreciated"
+- No: "I think Boris is right" (when you genuinely agree — flat "I think" undersells the conviction)
+- Yes: "I do think Boris is right"
+- No: "Boris's argument applies" (when conceding a point you want to land with weight)
+- Yes: "Boris's argument does apply"
 
 ### 5. Allergic to being narrated
 Show the process, don't commentate on it. Never describe what the writing is doing as it does it. This includes summary paragraphs that restate what was just argued and narrating having a thought rather than just stating it.
