@@ -1,0 +1,152 @@
+.wf-stages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem auto;
+  max-width: 600px;
+}
+
+.wf-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 60px;
+  border-radius: 4px;
+  border: 1.5px solid;
+  position: relative;
+}
+
+.wf-stage--accent {
+  border-color: var(--color-accent, #D2691E);
+}
+
+.wf-stage--muted {
+  border-color: var(--color-border, #E8E4DF);
+  border-style: dashed;
+}
+
+.wf-stage--plan {
+  padding-top: 8px;
+}
+
+.wf-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text, #2D2D2D);
+}
+
+.wf-sub {
+  font-size: 0.72rem;
+  color: var(--color-text-secondary, #5C5C5C);
+  margin-top: 2px;
+}
+
+.wf-arrow {
+  font-size: 1.2rem;
+  color: var(--color-accent, #D2691E);
+  flex-shrink: 0;
+}
+
+.wf-loop {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+}
+
+.wf-loop svg {
+  width: 60px;
+  height: 20px;
+}
+
+.wf-loop-label {
+  font-size: 0.65rem;
+  font-style: italic;
+  color: var(--color-accent, #D2691E);
+  margin-top: -2px;
+}
+
+.wf-bar {
+  display: flex;
+  max-width: 560px;
+  margin: 1.2rem auto 0;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.wf-bar-segment--accent {
+  flex: 2;
+  background: var(--color-accent, #D2691E);
+}
+
+.wf-bar-segment--muted {
+  flex: 1;
+  background: var(--color-border, #E8E4DF);
+}
+
+.wf-bar-labels {
+  display: flex;
+  max-width: 560px;
+  margin: 0.4rem auto 1.5rem;
+}
+
+.wf-bar-label {
+  font-size: 0.7rem;
+  font-style: italic;
+}
+
+.wf-bar-label--accent {
+  flex: 2;
+  text-align: center;
+  color: var(--color-accent, #D2691E);
+}
+
+.wf-bar-label--muted {
+  flex: 1;
+  text-align: center;
+  color: var(--color-text-secondary, #5C5C5C);
+}
+
+@media (max-width: 500px) {
+  .wf-stage {
+    width: 100px;
+    height: 50px;
+  }
+
+  .wf-label {
+    font-size: 0.72rem;
+  }
+
+  .wf-sub {
+    font-size: 0.62rem;
+  }
+}
+
+#slop-cost-curve {
+  position: relative;
+  margin: 1.5rem auto;
+  max-width: 600px;
+}
+
+#slop-cost-curve .tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--color-bg, #FAF9F6);
+  border: 1px solid var(--color-border, #E8E4DF);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  font-family: 'Roboto Slab', Georgia, serif;
+  color: var(--color-text, #2D2D2D);
+  opacity: 0;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
