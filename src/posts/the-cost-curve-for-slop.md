@@ -41,6 +41,8 @@ This is also where the skills you want to develop matter. On the prototyping sid
 
 <div id="slop-cost-curve"></div>
 
+*Hover to see where you are on the slop scale...*
+
 ## specification-driven development as a mindset
 
 I've been trialling [spec-kit](https://github.com/github/spec-kit/) recently, a tool that formalises specification-driven development into a structured workflow where specs generate code rather than the other way around. My take is that it's been educational, but I wouldn't reach for it as a toolkit right now. There's quite a lot of ceremony for the kind of work I'd be doing on the prototyping side.

@@ -50,12 +50,12 @@
   g.append('text')
     .attr('x', w / 2).attr('y', h + 36)
     .attr('text-anchor', 'middle')
-    .attr('font-size', 11).attr('fill', textMid)
+    .attr('font-size', 14).attr('fill', textMid)
     .text('accumulated decisions');
 
   g.append('text')
     .attr('text-anchor', 'middle')
-    .attr('font-size', 11).attr('fill', textMid)
+    .attr('font-size', 14).attr('fill', textMid)
     .attr('transform', 'translate(-36,' + (h / 2) + ') rotate(-90)')
     .text('cost of slop');
 
@@ -84,18 +84,16 @@
     .attr('stroke-width', 2.5);
 
   var totalLen1 = platformPath.node().getTotalLength();
+  var totalLen2 = protoPath.node().getTotalLength();
+
+  // Set up paths with animation ready but not triggered
   platformPath
     .attr('stroke-dasharray', totalLen1)
-    .attr('stroke-dashoffset', totalLen1)
-    .transition().duration(1200).ease(d3.easeCubicOut)
-    .attr('stroke-dashoffset', 0);
+    .attr('stroke-dashoffset', totalLen1);
 
-  var totalLen2 = protoPath.node().getTotalLength();
   protoPath
     .attr('stroke-dasharray', totalLen2)
-    .attr('stroke-dashoffset', totalLen2)
-    .transition().duration(1200).ease(d3.easeCubicOut)
-    .attr('stroke-dashoffset', 0);
+    .attr('stroke-dashoffset', totalLen2);
 
   var labelX = w + 12;
   var lastD = data[data.length - 1];
@@ -104,25 +102,48 @@
     .attr('transform', 'translate(' + labelX + ',' + y(lastD.platform) + ')')
     .style('opacity', 0);
   platformLabel.append('text')
-    .attr('font-size', 11).attr('fill', accent).attr('font-weight', 700)
+    .attr('font-size', 12).attr('fill', accent).attr('font-weight', 700)
     .text('platform / scalable');
   platformLabel.append('text')
     .attr('y', 16)
-    .attr('font-size', 10).attr('fill', accent).attr('font-style', 'italic')
+    .attr('font-size', 11).attr('fill', accent).attr('font-style', 'italic')
     .text('compounds fast');
-  platformLabel.transition().delay(800).duration(400).style('opacity', 1);
 
   var protoLabel = g.append('g')
     .attr('transform', 'translate(' + labelX + ',' + y(lastD.proto) + ')')
     .style('opacity', 0);
   protoLabel.append('text')
-    .attr('font-size', 11).attr('fill', textMid).attr('font-weight', 700)
+    .attr('font-size', 12).attr('fill', textMid).attr('font-weight', 700)
     .text('prototyping / analytical');
   protoLabel.append('text')
     .attr('y', 16)
-    .attr('font-size', 10).attr('fill', textMid).attr('font-style', 'italic')
+    .attr('font-size', 11).attr('fill', textMid).attr('font-style', 'italic')
     .text('refactoring is cheap');
-  protoLabel.transition().delay(800).duration(400).style('opacity', 1);
+
+  // Trigger animation when element enters viewport
+  var hasAnimated = false;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+
+        platformPath
+          .transition().duration(1200).ease(d3.easeCubicOut)
+          .attr('stroke-dashoffset', 0);
+
+        protoPath
+          .transition().duration(1200).ease(d3.easeCubicOut)
+          .attr('stroke-dashoffset', 0);
+
+        platformLabel.transition().delay(800).duration(400).style('opacity', 1);
+        protoLabel.transition().delay(800).duration(400).style('opacity', 1);
+
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(container);
 
   var hoverLine = g.append('line')
     .attr('y1', 0).attr('y2', h)
@@ -135,8 +156,10 @@
   var dotProto = g.append('circle')
     .attr('r', 4).attr('fill', muted).style('opacity', 0);
 
-  var tooltip = d3.select(container)
-    .append('div').attr('class', 'tooltip');
+  var tooltipPlatform = d3.select(container)
+    .append('div').attr('class', 'tooltip tooltip-platform');
+  var tooltipProto = d3.select(container)
+    .append('div').attr('class', 'tooltip tooltip-proto');
 
   var slopLevels = [
     { threshold: 0.0, label: 'spotless' },
@@ -178,19 +201,42 @@
     dotPlatform.attr('cx', px).attr('cy', y(d.platform)).style('opacity', 1);
     dotProto.attr('cx', px).attr('cy', y(d.proto)).style('opacity', 1);
 
-    var level = getSlopLevel(d.t);
+    // Calculate separate slop levels based on actual y-axis values
+    var platformLevel = getSlopLevel(d.platform);
+    var protoLevel = getSlopLevel(d.proto);
 
-    tooltip
-      .html('<strong>' + level + '</strong>')
+    var platformY = y(d.platform);
+    var protoY = y(d.proto);
+
+    // Position tooltips to avoid overlap
+    var tooltipOffset = 12;
+    var verticalGap = 40; // minimum vertical space between tooltips
+    var platformTop = platformY + margin.top - tooltipOffset;
+    var protoTop = protoY + margin.top - tooltipOffset;
+
+    // If tooltips would overlap, adjust proto tooltip downward
+    if (Math.abs(platformY - protoY) < verticalGap) {
+      protoTop = platformTop + verticalGap;
+    }
+
+    tooltipPlatform
+      .html('<strong>' + platformLevel + '</strong>')
       .style('opacity', 1)
-      .style('left', (px + margin.left + 12) + 'px')
-      .style('top', (y(d.platform) + margin.top - 12) + 'px');
+      .style('left', (px + margin.left + tooltipOffset) + 'px')
+      .style('top', platformTop + 'px');
+
+    tooltipProto
+      .html('<strong>' + protoLevel + '</strong>')
+      .style('opacity', 1)
+      .style('left', (px + margin.left + tooltipOffset) + 'px')
+      .style('top', protoTop + 'px');
   });
 
   overlay.on('mouseleave', function () {
     hoverLine.style('opacity', 0);
     dotPlatform.style('opacity', 0);
     dotProto.style('opacity', 0);
-    tooltip.style('opacity', 0);
+    tooltipPlatform.style('opacity', 0);
+    tooltipProto.style('opacity', 0);
   });
 })();
