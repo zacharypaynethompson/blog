@@ -1,0 +1,56 @@
+{
+  "intro": "A selection of the academic, professional, and personal work I've contributed to.",
+  "categories": [
+    {
+      "id": "academic",
+      "name": "Academic & Publications",
+      "blurb": "Research I have authored or contributed to.",
+      "projects": [
+        {
+          "title": "Manchester Centre for Health Economics — cited research",
+          "description": "Published health economics research that draws on and cites my contribution.",
+          "role": "Cited contributor",
+          "year": "2023",
+          "tags": ["health economics", "research"],
+          "links": [
+            { "label": "Download PDF", "url": "https://www.dropbox.com/REPLACE-ME/health-economics.pdf?dl=1", "type": "pdf" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "blurb": "Reports and analysis published in my professional roles.",
+      "projects": [
+        {
+          "title": "Labour market report",
+          "description": "Authored labour market analysis published on gov.uk.",
+          "role": "Author",
+          "year": "2024",
+          "tags": ["labour market", "economics", "public policy"],
+          "links": [
+            { "label": "Read on gov.uk", "url": "https://www.gov.uk/government/publications/REPLACE-ME", "type": "web" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "name": "Code & GitHub",
+      "blurb": "Public repositories and code projects.",
+      "projects": [
+        {
+          "title": "This blog",
+          "description": "A personal blog built with Eleventy, featuring an interactive D3 network graph and a canvas physics hero banner.",
+          "role": "Author",
+          "year": "2026",
+          "tags": ["eleventy", "javascript", "d3"],
+          "links": [
+            { "label": "View on GitHub", "url": "https://github.com/zacharypaynethompson/blog", "type": "github" }
+          ]
+        }
+      ]
+    }
+  ]
+}

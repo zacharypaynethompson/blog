@@ -12,7 +12,7 @@ Personal blog built with Eleventy 2.x (static site generator). Last updated: 202
 
 ```text
 src/
-  _data/           # Global data files (site.json)
+  _data/           # Global data files (site.json, portfolio.json)
   _includes/       # Layouts (base, page, post) and partials (nav, footer, etc.)
   assets/
     css/           # style.css (main), network-graph.css (graph-specific)
@@ -21,6 +21,7 @@ src/
   pages/           # Static pages (about.md)
   posts/           # Blog posts (markdown with frontmatter)
   explore.njk      # Explore page with network graph + post list
+  portfolio.njk    # Portfolio page (cards grouped by category, driven by _data/portfolio.json)
   index.njk        # Homepage with hero banner
   tags.njk         # Tags listing page
 specs/             # Feature specifications (001-004)
@@ -47,9 +48,9 @@ Feature specifications live in `specs/` with numbered prefixes:
 - **004-hero-physics-simulation**: Canvas-based constellation hero banner with cursor physics
 
 ## Recent Changes
+- 017-portfolio-page: Added JavaScript ES2020+ (browser, none required at runtime for this feature), Node.js 18+ LTS (build) + Eleventy 2.x (`@11ty/eleventy`), Nunjucks templating, markdown-it (existing). No new dependencies.
 - 006-blog-comments: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + Giscus widget (`https://giscus.app/client.js`, loaded via script tag — no npm package)
 - 006-blog-comments: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None new for frontend (vanilla JS, CSS); one BaaS provider for comment storage
-- 005-title-animation-variants: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None (vanilla JS, CSS animations/transforms — no new dependencies)
 
 ## Gotchas
 
@@ -58,3 +59,4 @@ Feature specifications live in `specs/` with numbered prefixes:
 ## Active Technologies
 - JavaScript ES2020+ (browser), CSS3, Nunjucks templates + Giscus widget (`https://giscus.app/client.js`, loaded via script tag — no npm package) (006-blog-comments)
 - GitHub Discussions (managed by GitHub; no custom database) (006-blog-comments)
+- JavaScript ES2020+ (browser, none required at runtime for this feature), Node.js 18+ LTS (build) + Eleventy 2.x (`@11ty/eleventy`), Nunjucks templating, markdown-it (existing). No new dependencies. (017-portfolio-page)

@@ -1,0 +1,74 @@
+---
+layout: layouts/base.njk
+title: portfolio
+permalink: /portfolio/
+---
+
+{% set projectCount = 0 %}
+{% for category in portfolio.categories %}
+  {% set projectCount = projectCount + (category.projects | length) %}
+{% endfor %}
+
+<div class="portfolio-page">
+  <header class="portfolio-header">
+    <h1>portfolio</h1>
+    {% if portfolio.intro %}
+    <p class="portfolio-intro">{{ portfolio.intro }}</p>
+    {% endif %}
+  </header>
+
+  {% if projectCount == 0 %}
+  <p class="portfolio-empty">More work is being added here soon — please check back shortly.</p>
+  {% else %}
+    {% for category in portfolio.categories %}
+      {% if category.projects | length %}
+      <section class="portfolio-category" id="{{ category.id }}" aria-labelledby="{{ category.id }}-heading">
+        <header class="portfolio-category-header">
+          <h2 id="{{ category.id }}-heading">{{ category.name }}</h2>
+          {% if category.blurb %}
+          <p class="portfolio-category-blurb">{{ category.blurb }}</p>
+          {% endif %}
+        </header>
+
+        <ul class="portfolio-grid">
+          {% for project in category.projects %}
+          <li class="portfolio-card">
+            <article>
+              <h3 class="portfolio-card-title">{{ project.title }}</h3>
+
+              {% if project.role or project.year %}
+              <p class="portfolio-card-meta">
+                {% if project.role %}<span class="portfolio-card-role">{{ project.role }}</span>{% endif %}
+                {% if project.role and project.year %} · {% endif %}
+                {% if project.year %}<span class="portfolio-card-year">{{ project.year }}</span>{% endif %}
+              </p>
+              {% endif %}
+
+              <p class="portfolio-card-description">{{ project.description }}</p>
+
+              {% if project.tags | length %}
+              <ul class="portfolio-card-tags">
+                {% for tag in project.tags %}
+                <li class="portfolio-card-tag">{{ tag }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+
+              {% if project.links | length %}
+              <ul class="portfolio-card-links">
+                {% for link in project.links %}
+                <li>
+                  <a href="{{ link.url }}" class="portfolio-card-link"{% if "http" in link.url %} rel="noopener"{% endif %}>{{ link.label }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </article>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
