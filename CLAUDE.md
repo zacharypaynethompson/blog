@@ -52,6 +52,16 @@ Feature specifications live in `specs/` with numbered prefixes:
 - 006-blog-comments: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + Giscus widget (`https://giscus.app/client.js`, loaded via script tag — no npm package)
 - 006-blog-comments: Added JavaScript ES2020+ (browser), CSS3, Nunjucks templates + None new for frontend (vanilla JS, CSS); one BaaS provider for comment storage
 
+## Hosting Files (PDFs, downloads, images)
+
+Drop files into `src/assets/files/`. They're copied verbatim into the build (via `addPassthroughCopy("src/assets")`) and served at a stable permalink:
+
+```
+src/assets/files/my-paper.pdf  →  /blog/assets/files/my-paper.pdf
+```
+
+Link to them from posts with the `/blog/` prefix, e.g. `[Download](/blog/assets/files/my-paper.pdf)`. Suitable for files up to a few MB; use Git LFS or external hosting for large media (>50 MB). Everything committed here is public.
+
 ## Gotchas
 
 - **pathPrefix and URLs**: The site is deployed at `/blog/` on GitHub Pages. Relative links in markdown posts must include the `/blog/` prefix (e.g. `/blog/posts/my-post/`, not `/posts/my-post/`).
