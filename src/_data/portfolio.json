@@ -113,16 +113,6 @@
           ]
         },
         {
-          "title": "LLM Classification Transformer",
-          "description": "Implements techniques for converting large language models from next-token prediction into classifiers.",
-          "role": "Author",
-          "year": "2025",
-          "tags": ["LLM", "classification", "machine learning"],
-          "links": [
-            { "label": "View on GitHub", "url": "https://github.com/zacichan/LLM-Classification-Transformer", "type": "github" }
-          ]
-        },
-        {
           "title": "Monte Carlo for CBA",
           "description": "A Python app applying Monte Carlo simulation to cost-benefit analysis, the practical companion to the CBA research proposal.",
           "role": "Author",
