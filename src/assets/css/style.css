@@ -1202,8 +1202,12 @@ main:has(.portfolio-page) {
   color: var(--color-accent-hover);
 }
 
+/* Keep hidden buttons occupying their slot so toggling them doesn't reflow
+   the track (which would jump the scroll position and clip the last card). */
 .portfolio-carousel-btn[hidden] {
-  display: none;
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* Track: a horizontal flex row with scroll-snap. Shows 3 cards; the rest
