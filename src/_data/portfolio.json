@@ -1,0 +1,128 @@
+{
+  "intro": "A selection of the academic, professional, and personal work I've contributed to.",
+  "categories": [
+    {
+      "id": "academic",
+      "name": "Academic & Publications",
+      "blurb": "Research I have authored or contributed to.",
+      "projects": [
+        {
+          "title": "Impacts of Food Hypersensitivities on Quality of Life and Willingness to Pay",
+          "description": "Co-authored research for the Food Standards Agency estimating what people would pay to remove the impact of food hypersensitivities (food allergy, coeliac disease and food intolerance) on their quality of life. Using a discrete choice experiment across 1,426 adults and 716 parents, average willingness to pay to remove an adult's condition for a year was £718, rising to £2,501 where parents valued removal for their child.",
+          "role": "Co-author (University of Manchester)",
+          "year": "2022",
+          "tags": ["health economics", "willingness to pay", "discrete choice experiment"],
+          "links": [
+            { "label": "Read the report (PDF)", "url": "https://staging.food.gov.uk/sites/default/files/media/document/OFF-SEN%20FSA%20WTP%20Final%20Report%20Dec%202022.pdf", "type": "pdf" }
+          ]
+        },
+        {
+          "title": "AI Adoption and Productivity: Evidence from UK Firms",
+          "description": "A cross-sectional study linking AI adoption to objective productivity outcomes using UK firm-level administrative data, pairing a DSIT survey of 3,500 businesses with FAME financial records. AI adopters showed productivity premiums of 10-15% (around £16,886 per employee), economically meaningful but not statistically significant, consistent with the J-curve where early adoption costs mask immediate gains.",
+          "role": "Author",
+          "year": "2025",
+          "tags": ["artificial intelligence", "productivity", "administrative data"],
+          "links": [
+            { "label": "Read the paper (PDF)", "url": "/blog/assets/files/ai-adoption-and-productivity.pdf", "type": "pdf" }
+          ]
+        },
+        {
+          "title": "Parliamentary Speeches and Public Opinion",
+          "description": "Group project using NLP and machine learning to classify economic sentiment across 897,000 UK parliamentary speeches from 2011 to 2025, compared against weekly YouGov public opinion data. Sentiment classification reached 91% accuracy, but parliamentary discourse showed a minimal predictive relationship with public economic concern.",
+          "role": "Co-author",
+          "year": "2025",
+          "tags": ["NLP", "machine learning", "public opinion"],
+          "links": [
+            { "label": "Read the paper (PDF)", "url": "/blog/assets/files/parliamentary-speeches-public-opinion.pdf", "type": "pdf" },
+            { "label": "View code on GitHub", "url": "https://github.com/zacichan/ECOM189-big-data-and-machine-learning", "type": "github" }
+          ]
+        },
+        {
+          "title": "Prices and Volatility Shocks on Energy Consumption",
+          "description": "A panel VAR study of how energy prices and volatility shocks affect UK electricity and gas consumption at local authority level from 2005 to 2023. Demand is largely price-inelastic for households (-0.17 to -0.34) and more elastic for industry, and locational pricing is unlikely to drive large household behavioural change, which is directly relevant to the Review of Energy Market Arrangements.",
+          "role": "Co-author",
+          "year": "2025",
+          "tags": ["time series", "energy economics", "panel VAR"],
+          "links": [
+            { "label": "Read the paper (PDF)", "url": "/blog/assets/files/energy-prices-volatility-consumption.pdf", "type": "pdf" },
+            { "label": "View code on GitHub", "url": "https://github.com/zacichan/ECOM186-time-series", "type": "github" }
+          ]
+        },
+        {
+          "title": "Do Green Investments Enhance UK Productivity?",
+          "description": "Group project examining whether green investment raises regional productivity, drawing on the UK's Net Zero Innovation Portfolio. Local authorities receiving NZIP funding saw labour productivity rise £0.20-£0.50 per hour worked, with gains appearing 3-4 years after investment, though establishing a direct causal link remains difficult.",
+          "role": "Co-author",
+          "year": "2024",
+          "tags": ["productivity", "green investment", "regional economics"],
+          "links": [
+            { "label": "Read the paper (PDF)", "url": "/blog/assets/files/green-investments-uk-productivity.pdf", "type": "pdf" }
+          ]
+        },
+        {
+          "title": "Ethiopia's Macroeconomic Dilemma",
+          "description": "Group project on the relationship between inflation and exchange rate devaluation in Ethiopia, extending the New Keynesian model to a small open economy and using SVAR analysis. Devaluing the Birr to the parallel rate appears unlikely to cause runaway inflation given the existing misalignment, supporting the IMF's recommendation.",
+          "role": "Co-author",
+          "year": "2024",
+          "tags": ["macroeconomics", "inflation", "exchange rates"],
+          "links": [
+            { "label": "Read the paper (PDF)", "url": "/blog/assets/files/ethiopia-macroeconomic-dilemma.pdf", "type": "pdf" }
+          ]
+        },
+        {
+          "title": "Monte Carlo Simulations in Cost-Benefit Analysis",
+          "description": "A research proposal for incorporating Monte Carlo simulation into cost-benefit analysis, testing whether modelling uncertainty would have changed the decisions made in past business cases rather than relying on deterministic point estimates.",
+          "role": "Author",
+          "year": "2024",
+          "tags": ["cost-benefit analysis", "Monte Carlo", "appraisal"],
+          "links": [
+            { "label": "Read the proposal (PDF)", "url": "/blog/assets/files/monte-carlo-cost-benefit-analysis.pdf", "type": "pdf" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "blurb": "Reports and analysis published in my professional roles.",
+      "projects": [
+        {
+          "title": "Assessment of AI Capabilities and the Impact on the UK Labour Market",
+          "description": "An assessment for DSIT and the AI Security Institute reviewing the evidence on AI capabilities and their effect on the UK labour market. Around 70% of UK workers hold jobs with AI-affectable tasks, split roughly evenly between roles likely to be complemented and those facing displacement risk, though the report is careful that the evidence does not yet establish causation.",
+          "role": "Contributor",
+          "year": "2026",
+          "tags": ["artificial intelligence", "labour market", "public policy"],
+          "links": [
+            { "label": "Read on gov.uk", "url": "https://www.gov.uk/government/publications/assessment-of-ai-capabilities-and-the-impact-on-the-uk-labour-market/assessment-of-ai-capabilities-and-the-impact-on-the-uk-labour-market", "type": "web" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "name": "Code & GitHub",
+      "blurb": "Public repositories and code projects.",
+      "projects": [
+        {
+          "title": "This blog",
+          "description": "A personal blog built with Eleventy, featuring an interactive D3 network graph and a canvas physics hero banner.",
+          "role": "Author",
+          "year": "2026",
+          "tags": ["eleventy", "javascript", "d3"],
+          "links": [
+            { "label": "View on GitHub", "url": "https://github.com/zacharypaynethompson/blog", "type": "github" }
+          ]
+        },
+        {
+          "title": "Monte Carlo for CBA",
+          "description": "A Python app applying Monte Carlo simulation to cost-benefit analysis, the practical companion to the CBA research proposal.",
+          "role": "Author",
+          "year": "2024",
+          "tags": ["python", "Monte Carlo", "cost-benefit analysis"],
+          "links": [
+            { "label": "View on GitHub", "url": "https://github.com/zacichan/monte_carlo_for_cba_app", "type": "github" }
+          ]
+        }
+      ]
+    }
+  ]
+}
