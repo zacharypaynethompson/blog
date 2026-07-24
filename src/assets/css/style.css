@@ -1122,3 +1122,305 @@ main {
 .giscus-container {
   min-height: 150px;
 }
+
+/* ==========================================================================
+   Portfolio Page Styles (017-portfolio-page)
+   ========================================================================== */
+
+/* The portfolio grid needs more room than the global 42rem main column,
+   so widen the main container when this page is shown. */
+main:has(.portfolio-page) {
+  max-width: 64rem;
+}
+
+.portfolio-page {
+  width: 100%;
+}
+
+.portfolio-header {
+  margin-bottom: var(--space-xl);
+}
+
+.portfolio-header h1 {
+  margin-top: 0;
+  margin-bottom: var(--space-xs);
+}
+
+.portfolio-intro {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.portfolio-empty {
+  color: var(--color-text-secondary);
+}
+
+.portfolio-category {
+  margin-bottom: var(--space-xl);
+}
+
+.portfolio-category-header {
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-xs);
+}
+
+.portfolio-category-header h2 {
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.portfolio-category-blurb {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Carousel: prev/next buttons flank a horizontally scrolling track. */
+.portfolio-carousel {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-xs);
+}
+
+.portfolio-carousel-btn {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--color-accent);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.portfolio-carousel-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+}
+
+/* Keep hidden buttons occupying their slot so toggling them doesn't reflow
+   the track (which would jump the scroll position and clip the last card). */
+.portfolio-carousel-btn[hidden] {
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Track: a horizontal flex row with scroll-snap. Shows 3 cards; the rest
+   scroll into view via the prev/next buttons (or trackpad/touch swipe). */
+.portfolio-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.portfolio-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each card takes a third of the track (minus the two gaps) on wide
+   viewports, dropping to 2-up then 1-up as the track narrows. */
+.portfolio-card {
+  display: flex;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 40rem) {
+  .portfolio-card {
+    flex-basis: calc((100% - var(--space-md)) / 2);
+  }
+}
+
+@media (min-width: 60rem) {
+  .portfolio-card {
+    flex-basis: calc((100% - 2 * var(--space-md)) / 3);
+  }
+}
+
+.portfolio-card > article {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  transition: border-color 0.2s;
+}
+
+.portfolio-card > article:hover {
+  border-color: var(--color-accent);
+}
+
+.portfolio-card-title {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: calc(var(--font-size-base) * 1.05);
+  overflow-wrap: anywhere;
+}
+
+.portfolio-card-meta {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: 0.85em;
+  color: var(--color-text-secondary);
+}
+
+.portfolio-card-description {
+  margin: 0 0 var(--space-sm) 0;
+  line-height: var(--line-height);
+}
+
+/* Clamp the card description to a few lines; full text lives in the modal.
+   Only applied once JS confirms the text overflows (via the clamp class). */
+.portfolio-card-description.is-clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: var(--space-xs);
+}
+
+.portfolio-card-readmore {
+  align-self: flex-start;
+  margin: 0 0 var(--space-sm) 0;
+  padding: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8em;
+  color: var(--color-accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.portfolio-card-readmore:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+.portfolio-card-readmore[hidden] {
+  display: none;
+}
+
+.portfolio-card-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-sm) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.portfolio-card-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7em;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+}
+
+/* Links pushed to the bottom of the card so cards align nicely. */
+.portfolio-card-links {
+  list-style: none;
+  padding: 0;
+  margin: auto 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.portfolio-card-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8em;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.portfolio-card-link:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* Modal for the full project description. */
+.portfolio-modal[hidden] {
+  display: none;
+}
+
+.portfolio-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.portfolio-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.portfolio-modal-dialog {
+  position: relative;
+  max-width: 36rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.portfolio-modal-close {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-sm);
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.portfolio-modal-close:hover {
+  color: var(--color-accent);
+}
+
+.portfolio-modal-title {
+  margin: 0 var(--space-md) var(--space-xs) 0;
+  font-size: calc(var(--font-size-base) * 1.2);
+}
+
+.portfolio-modal-meta {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 0.85em;
+  color: var(--color-text-secondary);
+}
+
+.portfolio-modal-description {
+  margin: 0;
+  line-height: var(--line-height);
+}
+
+/* Lock background scroll while the modal is open. */
+body.portfolio-modal-open {
+  overflow: hidden;
+}
