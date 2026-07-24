@@ -92,7 +92,7 @@ Is it that the French love mayonnaise, and the Belgians love mayonnaise, and som
   </g>
   <text x="28" y="424" font-size="13" fill="var(--color-text-secondary)" font-style="italic">United Kingdom - not on the list</text>
 </svg>
-<figcaption>The countries that turn up on "most mayonnaise consumed" rankings, roughly in order. Reliable per-capita figures barely exist, e.g., Russia is often cited at around 5 kg per person per year and the global average at 1.5-2 kg, but most of this is rank order rather than hard numbers, and there is no clean all-Europe table.<span class="figure-note">The point isn't the exact ordering. It's that Britain doesn't appear on these lists at all.</span></figcaption>
+<figcaption>The countries that turn up on "most mayonnaise consumed" rankings, roughly in order. Reliable per-capita figures, however, don't really exist.</figcaption>
 </figure>
 
 What I do know is that we eat it, some of us really like it, and we've somehow been told it doesn't count. We don't need a National Coleslaw Day, and we don't need a British version of the egg mayonnaise championship. But the fact that the idea sounds completely absurd here and completely normal in France is, I think, the whole thing. It's the same instinct I keep running into with [British food generally](/blog/posts/british-food-is-what-british-people-eat/), a thing we actually eat, and quietly like, that we've decided isn't worth taking seriously.
