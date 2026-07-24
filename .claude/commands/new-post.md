@@ -270,6 +270,27 @@ Don't tell the reader what they're about to learn or what's interesting about it
 - No: "And maybe that's the more interesting thing about British food at its best."
 - Yes: (removed — just state the thing directly)
 
+### 25. Start looser and more playful *(personal essays)*
+First drafts of personal essays run too flat and controlled. Lean into the spoken-register markers that add energy: rhetorical questions instead of flat statements, ellipsis for comedic timing, the occasional exclamation mark on a genuinely felt beat, a soft "So..." opener over a punchy imperative, and absurd concrete parentheticals for texture. Don't manufacture this everywhere (rule 7 still holds), but the baseline should be warmer and more animated than a first pass naturally produces.
+
+- No: "Picture this. You're in Málaga."
+- Yes: "So you're in Málaga."
+- No: "You think, maybe I need my first vegetable of the holiday."
+- Yes: "You think, maybe... I need some vegetables?"
+- No: "In Spain the mayonnaise-based salad is the popular one. It's a serious food."
+- Yes: "In Spain, a mayonnaise-based salad is a popular one, the one the waiter recommends! It's a *serious* food."
+- No: "In the UK, the equivalent is coleslaw." (flat statement)
+- Yes: "In the UK, the equivalent is perhaps coleslaw or your plain "potato salad", and does anyone take these seriously?" (turn the point into a question)
+- OK: "You've had four beers (those ones with the guy mopping his brow)" (absurd concrete parenthetical that adds texture)
+
+### 26. Cut the confession preface *(personal essays)*
+Don't announce that you're about to admit something. Drop "Here's my confession", "I'll be honest", "the truth is" and just say the thing. This is rule 5 (allergic to narration) applied to personal disclosures, and it also means trimming meta-hedges about your own honesty ("I don't want to pretend I do", "I'd be overclaiming if I said").
+
+- No: "Here's my confession. I really like all of it."
+- Yes: "I really like all of it."
+- No: "I don't really know why the disdain is there, and I don't want to pretend I do. But I have a suspicion."
+- Yes: "I don't really know why the disdain is there, but I have a suspicion."
+
 ## Formatting notes
 
 - Titles are always lowercase
